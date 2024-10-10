@@ -1,1 +1,2 @@
-web: gunicorn codestar.wsgi
+web: gunicorn
+work-schedule.wsgi
