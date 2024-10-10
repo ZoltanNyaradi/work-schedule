@@ -1,2 +1,1 @@
-web: gunicorn
-work-schedule.wsgi
+web: gunicorn work_schedule.wsgi
