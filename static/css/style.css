@@ -1,0 +1,56 @@
+/* Background-colors */
+body, #schedule, #read, #write{
+	background-color: #EEEEFF;
+}
+
+header, footer, .btn, .text-bubble{
+	background-color: #5AAEFF;
+}
+
+#edit-schedule, #log-out{
+	background-color: #FFAB5A;
+}
+
+/* Colors */
+h1, #log-out, .btn, .text-bubble{
+	color: #EEEEFF;
+}
+
+/* General__________________________________________________ */
+
+/* Sections_________________________________________________ */
+/* Header */
+header{
+	height: 10vh;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+h1{
+	margin: 0;
+	padding: 5px;
+}
+
+#log-out{
+	margin-right: 20px;
+	border-radius: 10px;
+
+	height: 40px;
+}
+
+/* Main */
+main{
+	min-height: 84vh;
+	width: 100vw;
+}
+
+/* Footer */
+footer{
+	height: 6vh;
+}
+
+/* Media query______________________________________________ */
+@media screen and (min-width: 1024px){
+	
+}
