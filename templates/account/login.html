@@ -1,0 +1,28 @@
+{% extends "account/account_base.html" %}
+
+{% block account_content %}
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mt-3 offset-md-1">
+      <h3>Sign up!</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 mt-3 offset-md-1">
+        <form class="auth_form" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          {{ form.as_p }}
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <button class="btn btn-auth right" type="submit">Sign In</button>
+        </form>
+      <p>
+        Don't have an account? <a href="{% url 'account_signup' %}">Sign up here</a>.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

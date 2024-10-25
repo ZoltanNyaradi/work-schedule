@@ -3,21 +3,20 @@ body, #schedule, #read, #write{
 	background-color: #EEEEFF;
 }
 
-header, footer, .btn, .text-bubble{
+header, footer, #account-container > div, .btn, .text-bubble{
 	background-color: #5AAEFF;
 }
 
-#edit-schedule, #log-out{
+#edit-schedule, .btn-auth{
 	background-color: #FFAB5A;
 }
 
 /* Colors */
-h1, #log-out, .btn, .text-bubble{
+h1, #log-out, #account-container a, .btn, .text-bubble{
 	color: #EEEEFF;
 }
 
 /* General__________________________________________________ */
-
 /* Sections_________________________________________________ */
 /* Header */
 header{
@@ -32,13 +31,6 @@ h1{
 	padding: 5px;
 }
 
-#log-out{
-	margin-right: 20px;
-	border-radius: 10px;
-
-	height: 40px;
-}
-
 /* Main */
 main{
 	min-height: 84vh;
@@ -50,7 +42,49 @@ footer{
 	height: 6vh;
 }
 
+/* Home page - Login / Sign-up */
+
+#login-form-div{
+	display: flex;
+}
+
+.auth_form > p{
+	display: flex;
+	justify-content: space-between;
+}
+
+#id_remember{
+	width: 25px;
+}
+
+.auth_form > p > input{
+	width: 65%;
+}
+
+.auth_form > ul, .helptext{
+    display: none;
+}
+
+
+
+
 /* Media query______________________________________________ */
 @media screen and (min-width: 1024px){
-	
+
+/* Sections_________________________________________________ */
+/* Home page / Login / Register */
+	#account-container{
+		height: 84vh;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	#account-container > div{
+		height: 80%;
+		width: 40%;
+
+		border-radius: 15px;
+	}
+
 }

@@ -2,5 +2,20 @@
 {% load static %}
 
 {% block content %}
-    <h1 style="background: brown;">Login:</h1>
+<div id="login-form-div">
+    <form id="login-form">
+        <div id="login-inputs-div">
+
+        </div>
+        <div id="login-register-button-div">
+            <li>
+                <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
+                    href="{% url 'account_signup' %}">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == login_url %}active{% endif %}" aria-current="page" href="{% url 'account_login' %}">Login</a>
+            </li>
+        </div>
+    </form>
+</div>
 {% endblock %}
