@@ -2,5 +2,136 @@
 {% load static %}
 
 {% block content %}
-<h2>Schedule</h2>
+	{% if user.is_authenticated %}
+		<div id="schedule">
+            <div>
+                <div id="schedule-container" class="container">
+                </div>
+            </div>
+            <div id="schedule-buttons">
+                <button id="previous" class="btn">
+                    Previous
+                </button>
+                <button id="next" class=btn>
+                    Next
+                </button>
+            </div>
+        </div>
+        <div id="edit-schedule">
+            <form id="edit-schedule-form">
+                <div>
+                    <div>
+                        <label for="employee-name">Employee: </label>
+                        </br>
+                        <input type="text" id="employee-name" name="employee-name">
+                    </div>
+                    <div>
+                        <label for="employee-name">Date: </label>
+                        </br>
+                        <input type="date" id="work-day" name="work-day">
+                    </div>
+                    <div>
+                        <label for="employee-name">Shift: </label>
+                        </br>
+                        <input type="text" id="work-hours" name="work-hours">
+                    </div>
+                </div>
+                <div id="fast-options">
+                    <div>
+                        <input type="radio" id="vacation" name="vacation">
+                        <label for="employee-name">Vacation: </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sick" name="sick">
+                        <label for="employee-name">Sick: </label>
+                    </div>
+                </div>
+                <div id="submit-schedule-div">
+                    <submit id="submit-schedule" class="btn">Submit</submit>
+                </div>
+            </form>
+        </div>
+        <div id="chat">
+            <div id="read-and-write">
+                <div id="read">
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>One longer test text to see what happends if it goes in to two row.</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>One longer test text to see what happends if it goes in to two row.</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                    <br>
+                    <div class=text-bubble>
+                        <p>Just a text for test!</p>
+                    </div>
+                </div>
+                <div id="write">
+                    <p>Typing test...<p>
+                </div>
+            </div>
+            <div id="send-message-div">
+                <button id="send-message" class="btn">Send</button>
+            </div>
+        </div>
+        <script src="{% static 'js/script.js' %}"></script>
+	{% else %}
+		
+	{% endif %}
 {% endblock %}

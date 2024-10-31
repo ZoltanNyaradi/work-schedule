@@ -17,6 +17,18 @@ h1, #log-out, #account-container a, .btn, .text-bubble{
 }
 
 /* General__________________________________________________ */
+p{
+	font-size: 9px;
+}
+
+label{
+	margin: 3px 1px;
+}
+
+.btn{
+	border-radius: 50px;
+}
+
 /* Sections_________________________________________________ */
 /* Header */
 header{
@@ -42,13 +54,116 @@ footer{
 	height: 6vh;
 }
 
-/* Home page - Login / Sign-up */
+/* Home page */
+/* Schedule div */
+#schedule{
+	padding:15px 0;
+}
+
+#schedule-buttons{
+	display: flex;
+ 	justify-content: space-around;
+}
+
+#schedule-container{
+	justify-self: auto;
+	margin: 0;
+	padding: 0;
+	width: auto;
+}
+
+#schedule-container > .row{
+	width: 100vw;
+}
+
+#schedule-container > .row > .col{
+	border: 1px solid black;
+
+	height: 30px;
+	width: 12.5vw;
+
+	text-align: center;
+	padding: 6px;
+}
+
+.first-col{
+	border-top: 0;
+}
+
+.last-col{
+	border-bottom: 0;
+}
+
+#schedule-buttons{
+	margin-top: 15px;
+}
+
+/* Edit-schedule div */
+form{
+	display: flex;
+	flex-direction: column;
+}
+form > div{
+	margin:15px;
+	width:35%;
+}
+
+#submit-schedule{
+	width:100%;
+}
+
+/* Chat div */
+
+#chat{
+	margin: 15px;
+}
+
+#read{
+	overflow: hidden;
+}
+
+.text-bubble{
+	margin: 1px 4px;
+
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.text-bubble > p{
+	margin: 0px;
+	padding: 4px;
+}
+
+#write{
+	border-top: 1px solid grey;
+}
+
+#send-message-div{
+	display: flex;
+	justify-content: right;
+}
+
+/* Authentication pages */
+
+#account-container {
+  width: 100%;
+}
+
+#account-container h3{
+	margin-top:30px;
+}
 
 #login-form-div{
 	display: flex;
 }
 
+.auth_form{
+	margin:40px 0;
+}
+
 .auth_form > p{
+	margin-bottom: 20px;
+
 	display: flex;
 	justify-content: space-between;
 }
@@ -66,13 +181,103 @@ footer{
 }
 
 
-
-
 /* Media query______________________________________________ */
 @media screen and (min-width: 1024px){
-
+	/* Background-Colors*/
+	#edit-schedule, #chat{
+		background-color: #FFAB5A;
+	}
 /* Sections_________________________________________________ */
-/* Home page / Login / Register */
+	/* Header */
+	header{
+		height: 10vh;
+	}
+
+	/* Main */
+	main{
+		display: flex;
+	}
+
+	/* Schedule div */
+	#schedule{
+		order: 1;
+
+		width: 60vw;
+		min-height: 85vh;
+	}
+
+	#schedule-container{
+		padding: 30px;
+	}
+
+	#schedule-container > .row{
+		width: 56vw;
+	}
+
+	#schedule-container > .row > .col{
+		width: 6vw;
+	}
+
+	/* Edit-schedule div */
+	#edit-schedule{
+		order: 0;
+
+		width: 20vw;
+		height: auto;
+
+		display: flex;
+		align-items: center;
+	}
+
+	#edit-schedule-form > div {
+	  width: 70%;
+	}
+
+	#edit-schedule-form input[type=text],#edit-schedule-form input[type=date]{
+		border-radius: 8px;
+		width: 14vw;
+	}
+
+	.first-col{
+		border-top: 1px solid black;
+	}
+
+	.last-col{
+		border-bottom: 1px solid black;
+	}
+
+	#submit-schedule-div{
+		display: flex;
+		justify-content: right;
+	}
+
+	/* Chat div */
+	#chat{
+		order: 2;
+		margin: 0;
+
+		width: 20vw;
+		height: auto;
+	}
+
+	#read-and-write{
+		margin: 2vh 15px;
+	}
+
+	#read{
+		height: 56vh;
+	}
+	#write{
+		height: 10vh;
+	}
+
+	#send-message-div{
+		margin: 2vh 15px;
+
+		display:flex;
+		justify-content: right;
+	}
+/* Authentication pages*/
 	#account-container{
 		height: 84vh;
 
