@@ -12,20 +12,19 @@ header, footer, #account-container > div, .btn, .text-bubble{
 }
 
 /* Colors */
-h1, #log-out, #account-container a, .btn, .text-bubble{
+p, h1, h3, #log-out, #account-container a, .btn, .text-bubble{
 	color: #EEEEFF;
 }
 
 /* General__________________________________________________ */
-p{
-	font-size: 9px;
-}
 
 label{
 	margin: 3px 1px;
 }
 
 .btn{
+	margin: 10px;
+
 	border-radius: 50px;
 }
 
@@ -153,10 +152,6 @@ form > div{
 	margin-top:30px;
 }
 
-#login-form-div{
-	display: flex;
-}
-
 .auth_form{
 	margin:40px 0;
 }
@@ -179,6 +174,17 @@ form > div{
 .auth_form > ul, .helptext{
     display: none;
 }
+
+	/* Login page */
+#login-form-div{
+	display: flex;
+}
+
+	/* Logout page */
+#log-out-confirmation{
+	margin-top:40px;
+}
+
 
 
 /* Media query______________________________________________ */
