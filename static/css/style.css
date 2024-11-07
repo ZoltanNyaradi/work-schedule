@@ -51,6 +51,18 @@ main{
 /* Footer */
 footer{
 	height: 6vh;
+
+	padding: 5px;
+}
+
+#loged-in-user{
+	margin: 0;
+	box-sizing: unset !important;
+
+	text-align: end;
+}
+#loged-in-user > span{
+	font-style: italic;
 }
 
 /* Home page */

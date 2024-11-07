@@ -42,7 +42,9 @@
 	</main>
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
-       
+        {% if user.is_authenticated %}
+            <p id="loged-in-user">You are loged in as <span>{{user}}<span></p>
+        {%endif%}
     </footer>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
