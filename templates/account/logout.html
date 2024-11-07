@@ -15,12 +15,19 @@
   </div>
   <div class="row">
     <div class="col-md-10 mt-3 offset-md-1">
-        <a>
-          <button class="btn btn-auth right" type="submit">Sign Out</button>
-        </a>
-        <a>
-          <button class="btn btn-auth right" type="submit">Go Back</button>
-        </a>
+        <form method="post" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div id="log-out-buttons">
+                <button class="btn btn-auth btn-signup right" type="submit">Sign Out</button>
+                <a href="{% url 'schedule' %}">
+                    <button class="btn btn-auth right" type="button">Go Back</button>
+                </a>
+            </div>
+        </form>
+        
     </div>
   </div>
 </div>

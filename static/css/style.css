@@ -185,6 +185,18 @@ form > div{
 	margin-top:40px;
 }
 
+#log-out-buttons{
+	display: flex;
+}
+
+#log-out-buttons > a{
+	width: 0;
+}
+
+#log-out-buttons button{
+	width: 100px;
+}
+
 
 
 /* Media query______________________________________________ */
