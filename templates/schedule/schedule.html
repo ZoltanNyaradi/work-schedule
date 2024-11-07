@@ -3,8 +3,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-
-	
+    {% if user.is_staff %}
 		<div id="schedule">
             <div>
                 <div id="schedule-container" class="container">
@@ -133,7 +132,19 @@
             </div>
         </div>
         <script src="{% static 'js/script.js' %}"></script>
-
+    {% else %}
+    <div id="account-container">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
+                        <h3>Your account haven't been confirmed yet.</h3>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 {% else %}
 <div id="account-container">
     <div>
