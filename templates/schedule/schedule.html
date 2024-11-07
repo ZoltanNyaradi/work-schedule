@@ -2,7 +2,9 @@
 {% load static %}
 
 {% block content %}
-	{% if user.is_authenticated %}
+{% if user.is_authenticated %}
+
+	
 		<div id="schedule">
             <div>
                 <div id="schedule-container" class="container">
@@ -131,7 +133,39 @@
             </div>
         </div>
         <script src="{% static 'js/script.js' %}"></script>
-	{% else %}
-		
-	{% endif %}
-{% endblock %}
+
+{% else %}
+<div id="account-container">
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mt-3 offset-md-2">
+                    <h3>Wellcome!</h3>
+                    <p>Work Schedule the best way to write and read the schedule.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 mt-3 offset-md-2">
+
+                    <form method="post" action="{% url 'account_login' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button class="btn btn-auth right" type="submit">Log In</button>
+                    </form>
+                    <form method="post" action="{% url 'account_signup' %}">
+                        {% csrf_token %}
+                        {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+                        <button class="btn btn-auth right" type="submit">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+    {% endblock %}

@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "schedule",
 ]
 SITE_ID = 2
-LOGIN_REDIRECT_URL = '/schedule/'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [

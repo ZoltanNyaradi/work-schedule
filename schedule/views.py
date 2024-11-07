@@ -2,5 +2,5 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def schedule2(request):
+def schedule(request):
     return render(request, 'schedule/schedule.html') 
