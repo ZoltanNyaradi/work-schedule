@@ -1,14 +1,16 @@
 /* Background-colors */
 body, #schedule, #read, #write{
-	background-color: #EEEEFF;
+	background-color: #EEEEFF; /* White */
 }
 
-header, footer, #account-container > div, .btn, .text-bubble{
-	background-color: #5AAEFF;
+header, footer,
+#account-container > div,
+.btn, .text-bubble, .first-row{
+	background-color: #5AAEFF; /* Blue */
 }
 
-#edit-schedule, .btn-auth{
-	background-color: #FFAB5A;
+#edit-schedule, .btn-auth, .first-col{
+	background-color: #FFAB5A; /* Orange */
 }
 
 /* Colors */
