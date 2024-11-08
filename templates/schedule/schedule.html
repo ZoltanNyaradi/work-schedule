@@ -19,6 +19,7 @@
             </div>
         </div>
         <div id="edit-schedule">
+            {% if user.is_superuser %}
             <form id="edit-schedule-form">
                 <div>
                     <div>
@@ -50,7 +51,8 @@
                 <div id="submit-schedule-div">
                     <submit id="submit-schedule" class="btn">Submit</submit>
                 </div>
-            </form>
+            </form>     
+        {% endif %}
         </div>
         <div id="chat">
             <div id="read-and-write">
