@@ -266,12 +266,26 @@ form > div{
 	}
 
 	#edit-schedule-form > div {
-	  width: 70%;
+	  width: 80%;
+	}
+	#edit-schedule-form > div {
+	  width: 14vw;
 	}
 
 	#edit-schedule-form input[type=text],#edit-schedule-form input[type=date]{
 		border-radius: 8px;
+	}
+	.long-input{
 		width: 14vw;
+	}
+
+	.shift-div{
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.shift{
+		width: 6vw;
 	}
 
 	.first-col{
@@ -284,8 +298,12 @@ form > div{
 
 	#submit-schedule-div{
 		display: flex;
-		justify-content: right;
+		justify-content: space-between;
 	}
+	#submit-schedule-div > submit{
+		width:6vw;
+	}
+
 
 	/* Chat div */
 	#chat{

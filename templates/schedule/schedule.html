@@ -30,20 +30,33 @@
                     <div>
                         <label for="employee-name">Employee: </label>
                         </br>
-                        <input type="text" id="employee-name" name="employee-name">
+                        <input class="long-input" type="text" id="employee-name" name="employee-name"  placeholder="Name">
                     </div>
                     <div>
-                        <label for="employee-name">Date: </label>
+                        <label for="shift-date">Date: </label>
                         </br>
-                        <input type="date" id="work-day" name="work-day">
+                        <input class="long-input" type="date" id="shift-date" name="shift-date">
                     </div>
                     <div>
-                        <label for="employee-name">Shift: </label>
+                        <label for="shift-start">Shift: </label>
                         </br>
-                        <input type="text" id="work-hours" name="work-hours">
+                        <div class="shift-div">
+                            <input class="shift" type="text" id="shift-start" name="shift-start"  placeholder="00:00">
+                            <label for="shift-end">-</label>
+                            <input class="shift" type="text" id="shift-end" name="shift-end" placeholder="00:00">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="shift-start-2">2nd Shift: </label>
+                        </br>
+                        <div class="shift-div">
+                            <input class="shift" type="text" id="shift-start-2" name="shift-start-2" placeholder="00:00">
+                            <label for="shift-end-2">-</label>
+                            <input class="shift" type="text" id="shift-end-2" name="shift-end-2" placeholder="00:00">
+                        </div>
                     </div>
                 </div>
-                <div id="fast-options">
+                <div id="quick-options">
                     <div>
                         <input type="radio" id="vacation" name="vacation">
                         <label for="employee-name">Vacation: </label>
@@ -54,7 +67,8 @@
                     </div>
                 </div>
                 <div id="submit-schedule-div">
-                    <submit id="submit-schedule" class="btn">Submit</submit>
+                    <submit id="submit-schedule" class="btn" type="submit">Edit</submit>
+                    <submit id="submit-schedule" class="btn" type="button">Delete</submit>
                 </div>
             </form>
         {% endif %}
