@@ -40,10 +40,14 @@ function loadSchedule(){
   				}
   				// Give a class and fill the first column.
   				else if(j==0){
-  					column[i][j].classList.add("first-col");
-
+  					console.log(employees[i])
+  					if (employees[i].groups%2==0){
+  						column[i][j].classList.add("first-col-primary");
+  					}else{
+  						column[i][j].classList.add("first-col-secundary");
+  					}
   					cell[i].push(document.createElement("p"));
-  					cell[i][j].innerHTML = employees[i];
+  					cell[i][j].innerHTML = employees[i].username;
   					column[i][j].appendChild(cell[i][j]);
   				}
   			}
@@ -67,7 +71,7 @@ function loadEmployees(){
 	differentGroups.forEach((group) =>{
 		users.forEach((user) =>{
 			if(group==user.groups && user.is_staff){
-				orderedUsers.push(user.username);
+				orderedUsers.push(user);
 			}
 		});
 	});

@@ -9,8 +9,12 @@ header, footer,
 	background-color: #5AAEFF; /* Blue */
 }
 
-#edit-schedule, .btn-auth, .first-col{
+#edit-schedule, .btn-auth, .first-col-primary{
 	background-color: #FFAB5A; /* Orange */
+}
+
+.first-col-secundary{
+	background-color: #FFC093;
 }
 
 /* Colors */
