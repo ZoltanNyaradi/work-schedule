@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded",function(){
 	loadSchedule();
-
+	loadToday();
+	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
 })
 
 function loadSchedule(){
@@ -40,7 +41,6 @@ function loadSchedule(){
   				}
   				// Give a class and fill the first column.
   				else if(j==0){
-  					console.log(employees[i])
   					if (employees[i].groups%2==0){
   						column[i][j].classList.add("first-col-primary");
   					}else{
@@ -76,4 +76,37 @@ function loadEmployees(){
 		});
 	});
 	return orderedUsers;
+}
+
+function nameCheck(){
+	/**
+	 * Checks if the given name in edit-schedule exist in the database,
+	 * if not than an error message shows up. 
+	 * In case of correction the error message dissapears.
+	 */
+
+	// Get the name from the form
+	let name = document.getElementById("employee-name");
+	// Get employees' data
+	let employees = loadEmployees();
+	// Make a list of the names of emplyoees
+	let names = [];
+	employees.forEach((employee)=>{
+		names.push(employee.username);
+	});
+	// Hide or show the error message
+	let nameError = document.getElementById("name-error");
+	if (names.includes(name.value)){
+		nameError.hidden=true;
+	}else{
+		nameError.hidden=false;
+	}
+}
+
+function loadToday(){
+	/**
+	 * Loads the current day into edit-schedule 
+	 */
+	const today = new Date().toISOString().slice(0, 10);
+	document.getElementById("shift-date").value=today;
 }
