@@ -6,8 +6,9 @@
     {% if user.is_staff %}
 		<div id="schedule">
             <div>
-                <div id="schedule-container" class="container">
-                </div>
+                
+            <div id="schedule-container" class="container">
+        </div>
             </div>
             <div id="schedule-buttons">
                 <button id="previous" class="btn">
@@ -19,7 +20,11 @@
             </div>
         </div>
         <div id="edit-schedule">
-            {% if user.is_superuser %}
+        <script id="users-data" type="application/json">
+                {{users|safe}}
+        </script>  
+    
+        {% if user.is_superuser %}
             <form id="edit-schedule-form">
                 <div>
                     <div>
@@ -51,7 +56,7 @@
                 <div id="submit-schedule-div">
                     <submit id="submit-schedule" class="btn">Submit</submit>
                 </div>
-            </form>     
+            </form>
         {% endif %}
         </div>
         <div id="chat">

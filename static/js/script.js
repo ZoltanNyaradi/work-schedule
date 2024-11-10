@@ -9,9 +9,10 @@ function loadSchedule(){
 	let column = [];
 	let cell = [];
 	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
-	let employee = ["","Joe", "Lily", "Bob", "Anna"];
+	let employees = loadEmployees();
+
 	let screenWidth = window.innerWidth;
-	let numberOfEmployees = employee.length;/////////////////////////////////////////////////////////////////
+	let numberOfEmployees = employees.length;/////////////////////////////////////////////////////////////////
 
 	for(let i = 0; i < numberOfEmployees; i++){
 		row.push(document.createElement("div"));
@@ -37,14 +38,38 @@ function loadSchedule(){
   					cell[i][j].innerHTML = daysOfTheWeek[j];
   					column[i][j].appendChild(cell[i][j]);
   				}
-  				// First column
+  				// Give a class and fill the first column.
   				else if(j==0){
   					column[i][j].classList.add("first-col");
 
   					cell[i].push(document.createElement("p"));
-  					cell[i][j].innerHTML = employee[i];
+  					cell[i][j].innerHTML = employees[i];
   					column[i][j].appendChild(cell[i][j]);
   				}
   			}
 	}
+}
+
+function loadEmployees(){
+	const users = JSON.parse(document.getElementById('users-data').textContent);
+
+	differentGroups = [];
+
+	users.forEach ((user) =>{
+		if(user.is_staff){
+		group = user.groups;
+		if(!differentGroups.includes(group)){
+			differentGroups.push(group);}
+		}})
+
+	orderedUsers=[""];
+
+	differentGroups.forEach((group) =>{
+		users.forEach((user) =>{
+			if(group==user.groups && user.is_staff){
+				orderedUsers.push(user.username);
+			}
+		});
+	});
+	return orderedUsers;
 }
