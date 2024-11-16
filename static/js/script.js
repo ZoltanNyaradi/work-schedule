@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded",function(){
 	loadSchedule();
 	loadToday();
 	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
+	let shiftClass = document.getElementsByClassName("shift");
+	for(let i=0; i<4; i++){
+		shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
+	}
+	document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
+	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
 })
 
 function loadSchedule(){
@@ -109,4 +115,29 @@ function loadToday(){
 	 */
 	const today = new Date().toISOString().slice(0, 10);
 	document.getElementById("shift-date").value=today;
+}
+
+function klickToShift(){
+	let shiftClass = document.getElementsByClassName("shift");
+	for(let i=0; i<4; i++){
+		shiftClass[i].style.backgroundColor = "#FFFFFF";
+	}
+	document.getElementById("vacation").checked=false;
+	document.getElementById("sick").checked=false;
+}
+
+function klickToVacation(){
+	let shiftClass = document.getElementsByClassName("shift");
+	for(let i=0; i<4; i++){
+		shiftClass[i].style.backgroundColor = "#EEEEFF88";
+	}
+	document.getElementById("sick").checked=false;
+}
+
+function klickToSick(){
+	let shiftClass = document.getElementsByClassName("shift");
+	for(let i=0; i<4; i++){
+		shiftClass[i].style.backgroundColor = "#EEEEFF88";
+	}
+	document.getElementById("vacation").checked=false;
 }
