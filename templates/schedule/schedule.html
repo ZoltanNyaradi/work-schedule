@@ -20,43 +20,39 @@
             </div>
         </div>
         <div id="edit-schedule">
-        <script id="users-data" type="application/json">
-                {{users|safe}}
-        </script>  
     
         {% if user.is_superuser %}
-            <form id="edit-schedule-form">
+            <form id="scheduleForm" method="post" action="{% url 'schedule'%}">
+                {% csrf_token %}
                 <div>
                     <div>
-                        <label for="employee-name">Employee: </label>
-                        </br>
-                        <input class="long-input" type="text" id="employee-name" name="employee-name"  placeholder="Name">
-                         <label id="name-error" for="employee-name" hidden="true">Employee have not found</label>
+                         <select id="employee-name" name="user" class="long-input">
+                        </select>
                     </div>
                     <div>
                         <label for="shift-date">Date: </label>
                         </br>
-                        <input class="long-input" type="date" id="shift-date" name="shift-date">
+                        <input class="long-input" type="date" id="shift-date" name="date">
                     </div>
                     <div>
                         <label for="shift-start">Shift: </label>
                         </br>
                         <div class="shift-div">
-                            <input class="shift" type="time" id="shift-start" name="shift-start">
+                            <input class="shift" type="time" id="shift-start" name="begin_of_work_1">
                             <label for="shift-end">-</label>
-                            <input class="shift" type="time" id="shift-end" name="shift-end">
+                            <input class="shift" type="time" id="shift-end" name="end_of_work_1">
                         </div>
                     </div>
                     <div>
                         <label for="shift-start-2">2nd Shift: </label>
                         </br>
                         <div class="shift-div">
-                            <input class="shift" type="time" id="shift-start-2" name="shift-start-2">
+                            <input class="shift" type="time" id="shift-start-2" name="begin_of_work_2">
                             <label for="shift-end-2">-</label>
-                            <input class="shift" type="time" id="shift-end-2" name="shift-end-2">
+                            <input class="shift" type="time" id="shift-end-2" name="end_of_work_2">
                         </div>
                     </div>
-                </div>
+                </div><!--
                 <div id="quick-options">
                     <div>
                         <input type="radio" id="vacation" name="vacation">
@@ -67,11 +63,17 @@
                         <label for="employee-name">Sick: </label>
                     </div>
                 </div>
+            -->
                 <div id="submit-schedule-div">
-                    <submit id="submit-schedule" class="btn" type="submit">Edit</submit>
-                    <submit id="submit-schedule" class="btn" type="button">Delete</submit>
+                    <button id="edit-schedule" class="btn" type="submit">Edit</button>
+                    <button id="delete-schedule" class="btn" type="button">Delete</button>
                 </div>
             </form>
+            <script id="users-data" type="application/json">
+                {{users|safe}}
+        </script>  
+
+
         {% endif %}
         </div>
         <div id="chat">

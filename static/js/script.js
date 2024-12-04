@@ -1,13 +1,15 @@
 document.addEventListener("DOMContentLoaded",function(){
 	loadSchedule();
 	loadToday();
-	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
+	/*document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
 	let shiftClass = document.getElementsByClassName("shift");
 	for(let i=0; i<4; i++){
 		shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
 	}
 	document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
-	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
+	*///document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
+
+	loadEmployeesToEditSchedule();
 })
 
 function loadSchedule(){
@@ -140,4 +142,20 @@ function klickToSick(){
 		shiftClass[i].style.backgroundColor = "#EEEEFF88";
 	}
 	document.getElementById("vacation").checked=false;
+}
+
+function loadEmployeesToEditSchedule(){
+	const employeesForDropdown = JSON.parse(document.getElementById('users-data').textContent);
+	i=0;
+	let employeeName = document.getElementById("employee-name");
+	let options=[];
+	employeesForDropdown.forEach ((employeeForDropdown)=>{
+		options[i] = document.createElement("option");
+		options[i].value = employeeForDropdown.id;
+		options[i].text = employeeForDropdown.username;
+		if (employeeForDropdown.is_staff){
+			employeeName.appendChild(options[i]);
+		}
+		i++;
+	})
 }
