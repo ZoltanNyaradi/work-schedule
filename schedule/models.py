@@ -25,7 +25,9 @@ class Schedule(models.Model):
     on_delete=models.PROTECT,
     related_name="worker")
   date = models.DateField()
-  begin_of_work_1 = models.TimeField()
-  end_of_work_1 = models.TimeField()
+  begin_of_work_1 = models.TimeField(null=True, blank=True)
+  end_of_work_1 = models.TimeField(null=True, blank=True)
   begin_of_work_2 = models.TimeField(null=True, blank=True)
   end_of_work_2 = models.TimeField(null=True, blank=True)
+  sick = models.BooleanField(default=False)
+  vacation = models.BooleanField(default=False)

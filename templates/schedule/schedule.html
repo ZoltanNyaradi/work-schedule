@@ -52,7 +52,7 @@
                             <input class="shift" type="time" id="shift-end-2" name="end_of_work_2">
                         </div>
                     </div>
-                </div><!--
+                </div>
                 <div id="quick-options">
                     <div>
                         <input type="radio" id="vacation" name="vacation">
@@ -63,15 +63,18 @@
                         <label for="employee-name">Sick: </label>
                     </div>
                 </div>
-            -->
+            
                 <div id="submit-schedule-div">
                     <button id="edit-schedule" class="btn" type="submit">Edit</button>
                     <button id="delete-schedule" class="btn" type="button">Delete</button>
                 </div>
             </form>
-            <script id="users-data" type="application/json">
-                {{users|safe}}
-        </script>  
+        <script id="users-data" type="application/json">
+            {{users|safe}}
+        </script> 
+        <script id="schedule-data" type="application/json">
+            {{ schedules|safe }}
+        </script>
 
 
         {% endif %}

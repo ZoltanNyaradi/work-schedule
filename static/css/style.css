@@ -95,12 +95,16 @@ footer{
 
 #schedule-container > .row > .col{
 	border: 1px solid black;
-
-	height: 30px;
+  
+  height: 40px;
 	width: 12.5vw;
 
 	text-align: center;
 	padding: 6px;
+}
+
+.first-row{
+	height: 60px !important;
 }
 
 .first-col{

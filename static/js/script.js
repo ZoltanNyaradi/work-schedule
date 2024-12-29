@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded",function(){
 	loadSchedule();
 	loadToday();
-	/*document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
+	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
 	let shiftClass = document.getElementsByClassName("shift");
 	for(let i=0; i<4; i++){
 		shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
 	}
 	document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
-	*///document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
+	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
 
 	loadEmployeesToEditSchedule();
 })
@@ -18,17 +18,19 @@ function loadSchedule(){
 	let column = [];
 	let cell = [];
 	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
+	let datesOfTheWeek = loadDatesOfTheWeek();
 	let employees = loadEmployees();
 
 	let screenWidth = window.innerWidth;
 	let numberOfEmployees = employees.length;/////////////////////////////////////////////////////////////////
 
+
+	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
 	for(let i = 0; i < numberOfEmployees; i++){
 		row.push(document.createElement("div"));
 
 		row[i].classList.add("row");
 
-  		row[i].style.height = "30px";
   		schedule.children[0].children[0].appendChild(row[i]);
 
   		column.push([]);
@@ -44,7 +46,7 @@ function loadSchedule(){
   					column[i][j].classList.add("first-row");
 
   					cell[i].push(document.createElement("p"));
-  					cell[i][j].innerHTML = daysOfTheWeek[j];
+  					cell[i][j].innerHTML = `${daysOfTheWeek[j]} <br/> ${datesOfTheWeek[j]}`;
   					column[i][j].appendChild(cell[i][j]);
   				}
   				// Give a class and fill the first column.
@@ -54,10 +56,14 @@ function loadSchedule(){
   					}else{
   						column[i][j].classList.add("first-col-secundary");
   					}
+  					column[i][j].classList.add("first-col")
   					cell[i].push(document.createElement("p"));
   					cell[i][j].innerHTML = employees[i].username;
   					column[i][j].appendChild(cell[i][j]);
+  				} else{
+  					column[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
   				}
+
   			}
 	}
 }
@@ -158,4 +164,59 @@ function loadEmployeesToEditSchedule(){
 		}
 		i++;
 	})
+}
+
+function loadDatesOfTheWeek(){
+	const date = new Date();
+	let todayIs = date.getDay();
+
+	if (todayIs==0){
+		date.setDate(date.getDate()-6);
+	} else{
+		date.setDate(date.getDate()-todayIs+1)
+	}
+
+	let datesOfTheWeek = [];
+	datesOfTheWeek.push("");
+	for (let i=0; i<7; i++){
+		datesOfTheWeek.push(date.toISOString().slice(0, 10));
+		date.setDate(date.getDate()+1);
+	}
+	return datesOfTheWeek;
+}
+
+function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWeek){
+
+	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
+	
+	let shiftsOfTheWeek = [];
+	let shift = "";
+
+	for (let i = 1; i<numberOfEmployees; i++){
+
+		shiftsOfTheWeek.push([]);
+		for (let j = 1; j<8; j++){
+			schedules.forEach((individuellSchedule)=>{
+				if(individuellSchedule.user==employees[i].id && individuellSchedule.date == datesOfTheWeek[j]){
+					
+					shift = individuellSchedule.begin_of_work_1.slice(0,5) + "-" +
+					    individuellSchedule.end_of_work_1.slice(0,5);
+
+					if(individuellSchedule.begin_of_work_2 != null){
+						shift += "<br class='shift-break'>"+ individuellSchedule.begin_of_work_2.slice(0,5) + "-" +
+					    individuellSchedule.end_of_work_2.slice(0,5);
+					}					
+				} else {
+					shift = ""
+				}
+				
+			})
+			shiftsOfTheWeek[i-1].push(shift);
+			
+
+		}
+	}
+	console.log(shiftsOfTheWeek)
+	return shiftsOfTheWeek
+
 }
