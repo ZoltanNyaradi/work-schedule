@@ -89,7 +89,10 @@ function loadSchedule(){
   					column[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
   						// Add this shift as a text to it
   					}
-  					//document.addEventListener()
+  					column[i][j].addEventListener("click",(event)=>{
+  						fillForm(datesOfTheWeek[j], employees[i].id)
+  					});
+  						// Fill employee and date to editSchedule 
   				}
 
   			}
@@ -254,4 +257,13 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 	//console.log(shiftsOfTheWeek);
 	return shiftsOfTheWeek
 
+}
+
+function fillForm(date, employee){
+	/**
+	* Fill date and employee in edit schedule
+	* with the given properties. 
+	*/
+	document.getElementById("employee-name").value = employee;
+	document.getElementById("shift-date").value = date;
 }
