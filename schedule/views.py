@@ -48,7 +48,7 @@ def schedule(request):
 
     if request.method == "POST":
         schedule_form = ScheduleForm(data=request.POST)
-        if schedule_form.is_valid():
+        if schedule_form.is_valid():           
             is_schedule_exist = False
             for schedule in schedules:
                 if (
@@ -62,6 +62,8 @@ def schedule(request):
                     existing_schedule.end_of_work_1 = schedule_form.cleaned_data["end_of_work_1"]
                     existing_schedule.begin_of_work_2 = schedule_form.cleaned_data["begin_of_work_2"]
                     existing_schedule.end_of_work_2 = schedule_form.cleaned_data["end_of_work_2"]
+                    existing_schedule.sick = schedule_form.cleaned_data["sick"]
+                    existing_schedule.vacation = schedule_form.cleaned_data["vacation"]
                     existing_schedule.save()
 
                     is_schedule_exist = True

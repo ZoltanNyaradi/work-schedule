@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 
 function loadSchedule(){
+	/***
+	 * Load the schedule table on the screen. 
+	 */
 	let schedule = document.getElementById("schedule");
 	let row = [];
 	let column = [];
@@ -20,48 +23,73 @@ function loadSchedule(){
 	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
 	let datesOfTheWeek = loadDatesOfTheWeek();
 	let employees = loadEmployees();
-
-	let screenWidth = window.innerWidth;
-	let numberOfEmployees = employees.length;/////////////////////////////////////////////////////////////////
-
-
+	let numberOfEmployees = employees.length;
 	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
+	
+
 	for(let i = 0; i < numberOfEmployees; i++){
 		row.push(document.createElement("div"));
-
+		// Make a row for every employee and one more for the dates
 		row[i].classList.add("row");
-
+		// Add the row class to them
   		schedule.children[0].children[0].appendChild(row[i]);
+  		// Place it in the schedule
 
   		column.push([]);
+  		// Add an empty Array for columns
   		cell.push([]);
+  		// Add an empty Array for cells
 
   			for(let j = 0; j < 8; j++){
   				column[i].push(document.createElement("div"));
+  				// Make a column for the emplyoees and 7 for the days of the week
   				column[i][j].classList.add("col");
-
+  				// Add col class to them
   				row[i].appendChild(column[i][j])
-  				// Give a class and fill the first row.
-  				if(i==0){
-  					column[i][j].classList.add("first-row");
+  				// Add the columns to a row
 
+  				if(i==0){
+  					// If we are in the first row
+  					column[i][j].classList.add("first-row");
+  					// Add the first row class to it
   					cell[i].push(document.createElement("p"));
+  					// Add a paragraph to the cell
   					cell[i][j].innerHTML = `${daysOfTheWeek[j]} <br/> ${datesOfTheWeek[j]}`;
+  					// Add the proper day and date to it
   					column[i][j].appendChild(cell[i][j]);
+  					// Add it to a column
   				}
-  				// Give a class and fill the first column.
   				else if(j==0){
+  					// Else if it is the first column but not the first row
   					if (employees[i].groups%2==0){
+  						// Color the first cells by positions
+  						// If the employee in an even group
   						column[i][j].classList.add("first-col-primary");
+  						// Add to the primary color group
   					}else{
-  						column[i][j].classList.add("first-col-secundary");
+  						column[i][j].classList.add("first-col-secondary");
+  						// Else add to the secondary color group
   					}
-  					column[i][j].classList.add("first-col")
+  					column[i][j].classList.add("first-col");
+  					// Add the first-col class to it
   					cell[i].push(document.createElement("p"));
+  					// Add a paragraph to the cell
   					cell[i][j].innerHTML = employees[i].username;
+  					// Write an emplyoee's name in it
   					column[i][j].appendChild(cell[i][j]);
-  				} else{
+  					// The cell to a column
+  				}else{
+  					// If it is neither first row or first column
+  					if(shiftsOfTheWeek[i-1][j-1]===undefined){
+  						// If there is no related shift to the cell
+  						column[i][j].innerHTML = "";
+  						// Add an empty text to the cell
+  					} else {
+  						// If there is a related shift to the cell
   					column[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
+  						// Add this shift as a text to it
+  					}
+  					//document.addEventListener()
   				}
 
   			}
@@ -138,6 +166,7 @@ function klickToVacation(){
 	let shiftClass = document.getElementsByClassName("shift");
 	for(let i=0; i<4; i++){
 		shiftClass[i].style.backgroundColor = "#EEEEFF88";
+		shiftClass[i].value = undefined;
 	}
 	document.getElementById("sick").checked=false;
 }
@@ -146,6 +175,7 @@ function klickToSick(){
 	let shiftClass = document.getElementsByClassName("shift");
 	for(let i=0; i<4; i++){
 		shiftClass[i].style.backgroundColor = "#EEEEFF88";
+		shiftClass[i].value = undefined;
 	}
 	document.getElementById("vacation").checked=false;
 }
@@ -188,7 +218,6 @@ function loadDatesOfTheWeek(){
 function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWeek){
 
 	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
-	
 	let shiftsOfTheWeek = [];
 	let shift = "";
 
@@ -198,25 +227,31 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 		for (let j = 1; j<8; j++){
 			schedules.forEach((individuellSchedule)=>{
 				if(individuellSchedule.user==employees[i].id && individuellSchedule.date == datesOfTheWeek[j]){
-					
-					shift = individuellSchedule.begin_of_work_1.slice(0,5) + "-" +
-					    individuellSchedule.end_of_work_1.slice(0,5);
+					if(individuellSchedule.vacation==true){
+						shift = "Vacation";
+					} else {
+						if (individuellSchedule.sick==true){
+							shift = "Sick";
+						} else {
+							shift = individuellSchedule.begin_of_work_1.slice(0,5) + "-" +
+							    individuellSchedule.end_of_work_1.slice(0,5);
 
-					if(individuellSchedule.begin_of_work_2 != null){
-						shift += "<br class='shift-break'>"+ individuellSchedule.begin_of_work_2.slice(0,5) + "-" +
-					    individuellSchedule.end_of_work_2.slice(0,5);
+							if(individuellSchedule.begin_of_work_2 != null){
+								shift += "<br class='shift-break'>"+ individuellSchedule.begin_of_work_2.slice(0,5) + "-" +
+							    individuellSchedule.end_of_work_2.slice(0,5);
+							}
+						}	
 					}					
+				shiftsOfTheWeek[i-1].push(shift);
 				} else {
-					shift = ""
+					shift = "";
+
 				}
-				
-			})
-			shiftsOfTheWeek[i-1].push(shift);
-			
+			})			
 
 		}
 	}
-	console.log(shiftsOfTheWeek)
+	//console.log(shiftsOfTheWeek);
 	return shiftsOfTheWeek
 
 }
