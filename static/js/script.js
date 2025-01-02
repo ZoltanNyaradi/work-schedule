@@ -223,13 +223,16 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
 	let shiftsOfTheWeek = [];
 	let shift = "";
+	let shiftExist = false;
 
-	for (let i = 1; i<numberOfEmployees; i++){
+	for (let i = 0; i<numberOfEmployees; i++){
 
 		shiftsOfTheWeek.push([]);
 		for (let j = 1; j<8; j++){
+			shiftExist=false;
 			schedules.forEach((individuellSchedule)=>{
 				if(individuellSchedule.user==employees[i].id && individuellSchedule.date == datesOfTheWeek[j]){
+					shiftExist = true;
 					if(individuellSchedule.vacation==true){
 						shift = "Vacation";
 					} else {
@@ -243,18 +246,21 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 								shift += "<br class='shift-break'>"+ individuellSchedule.begin_of_work_2.slice(0,5) + "-" +
 							    individuellSchedule.end_of_work_2.slice(0,5);
 							}
-						}	
+						}
+
 					}					
-				shiftsOfTheWeek[i-1].push(shift);
-				} else {
-					shift = "";
-
 				}
-			})			
 
+				
+			})
+			if(shiftExist){
+				shiftsOfTheWeek[i].push(shift);
+			} else {
+				shiftsOfTheWeek[i].push("");
+			}
 		}
 	}
-	//console.log(shiftsOfTheWeek);
+	shiftsOfTheWeek.shift();
 	return shiftsOfTheWeek
 
 }
