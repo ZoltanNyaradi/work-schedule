@@ -49,31 +49,36 @@ def schedule(request):
 
     if request.method == "POST":
         edit_schedule_crud = request.POST.get("edit-schedule-crud")
-        print(request.POST)
-        print (edit_schedule_crud)
         schedule_form = ScheduleForm(data=request.POST)
 
         if schedule_form.is_valid():    
             if edit_schedule_crud == "edit":
-                existing_schedule = Schedule.objects.filter(
-                    user=schedule_form.cleaned_data["user"].id,
-                    date=schedule_form.cleaned_data["date"]
-                ).first()
-                print(existing_schedule)
-                if existing_schedule:
-                    existing_schedule.begin_of_work_1 = schedule_form.cleaned_data["begin_of_work_1"]
-                    existing_schedule.end_of_work_1 = schedule_form.cleaned_data["end_of_work_1"]
-                    existing_schedule.begin_of_work_2 = schedule_form.cleaned_data["begin_of_work_2"]
-                    existing_schedule.end_of_work_2 = schedule_form.cleaned_data["end_of_work_2"]
-                    existing_schedule.sick = schedule_form.cleaned_data["sick"]
-                    existing_schedule.vacation = schedule_form.cleaned_data["vacation"]
-                    existing_schedule.save()
-                    print("shift updated")
-                       
+                print(schedule_form.cleaned_data["begin_of_work_2"])
+                if ((schedule_form.cleaned_data["begin_of_work_1"] != None
+                    and schedule_form.cleaned_data["end_of_work_1"] != None)
+                    or schedule_form.cleaned_data["sick"] == True
+                    or schedule_form.cleaned_data["vacation"] == True
+                ):
+                    existing_schedule = Schedule.objects.filter(
+                        user=schedule_form.cleaned_data["user"].id,
+                        date=schedule_form.cleaned_data["date"]
+                    ).first()
+                    print(existing_schedule)
+                    if existing_schedule:
+                        existing_schedule.begin_of_work_1 = schedule_form.cleaned_data["begin_of_work_1"]
+                        existing_schedule.end_of_work_1 = schedule_form.cleaned_data["end_of_work_1"]
+                        existing_schedule.begin_of_work_2 = schedule_form.cleaned_data["begin_of_work_2"]
+                        existing_schedule.end_of_work_2 = schedule_form.cleaned_data["end_of_work_2"]
+                        existing_schedule.sick = schedule_form.cleaned_data["sick"]
+                        existing_schedule.vacation = schedule_form.cleaned_data["vacation"]
+                        existing_schedule.save()
+                        print("shift updated")
+                           
+                    else:
+                        schedule_form.save()
+                        print("shift created")
                 else:
-                    schedule_form.save()
-                    print("shift created")
-
+                    print("shift empty")
             else:
                 Schedule.objects.filter(
                     user = schedule_form.cleaned_data["user"].id,
