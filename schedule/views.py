@@ -49,10 +49,12 @@ def schedule(request):
 
     if request.method == "POST":
         edit_schedule_crud = request.POST.get("edit-schedule-crud")
+        print(request.POST)
+        print (edit_schedule_crud)
         schedule_form = ScheduleForm(data=request.POST)
 
         if schedule_form.is_valid():    
-            if edit_schedule_crud == "edit-schedule-btn":
+            if edit_schedule_crud == "edit":
                 existing_schedule = Schedule.objects.filter(
                     user=schedule_form.cleaned_data["user"].id,
                     date=schedule_form.cleaned_data["date"]
