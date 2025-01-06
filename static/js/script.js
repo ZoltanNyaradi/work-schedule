@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded",function(){
-	loadSchedule();
+	loadSchedule(loadDatesOfTheWeek());
 	loadToday();
+	document.getElementById("previous").addEventListener("click",(event)=>{changeWeek(-6)});
+	document.getElementById("next").addEventListener("click",(event)=>{changeWeek(+8)});
+
+
 	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
 	let shiftClass = document.getElementsByClassName("shift");
 	for(let i=0; i<4; i++){
@@ -12,7 +16,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	loadEmployeesToEditSchedule();
 })
 
-function loadSchedule(){
+function loadSchedule(datesOfTheWeek){
 	/***
 	 * Load the schedule table on the screen. 
 	 */
@@ -21,7 +25,6 @@ function loadSchedule(){
 	let column = [];
 	let cell = [];
 	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
-	let datesOfTheWeek = loadDatesOfTheWeek();
 	let employees = loadEmployees();
 	let numberOfEmployees = employees.length;
 	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
@@ -272,4 +275,46 @@ function fillForm(date, employee){
 	*/
 	document.getElementById("employee-name").value = employee;
 	document.getElementById("shift-date").value = date;
+}
+
+function changeWeek(change){
+	/**
+	 * Either loads the previous
+	 * or the next week,
+	 * depending on the parameter
+	 */
+
+	let scheduleContainer = document.getElementById("schedule-container");
+	// Get the container of the schedule
+
+	const oldMonday = scheduleContainer.children[0].children[1].innerHTML.slice(14,25);
+	// Get the date of the currently loaded monday
+	const year = oldMonday.slice(0,5);
+	// Slice the year
+	const month = oldMonday.slice(6,8);
+	// Slice the month
+	const day = oldMonday.slice(9);
+	// Slice the day
+
+	let monday = new Date(year, month-1, day);
+	// Declare a date type version of monday
+	monday.setDate(monday.getDate() + change);
+	// Get the next or previous monday
+
+	let date = monday;
+	// Declare a new variable for the iteration
+	let datesOfTheWeek = [""];
+	// Create an array for the new week
+
+	for (let i=0; i<7; i++){
+		// Fill the array with the new dates
+		datesOfTheWeek.push(date.toISOString().slice(0, 10));
+		date.setDate(date.getDate()+1);
+	}
+
+	scheduleContainer.innerHTML="";
+	// Delete the old schedule
+
+	loadSchedule(datesOfTheWeek);
+	// Create the new schedule
 }
