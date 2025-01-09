@@ -1,5 +1,5 @@
 /* Background-colors */
-body, #schedule, #read, #write{
+body, #schedule, #read, #write, #message{
 	background-color: #EEEEFF; /* White */
 }
 
@@ -51,7 +51,6 @@ h1{
 /* Main */
 main{
 	min-height: 84vh;
-	width: 100vw;
 }
 
 /* Footer */
@@ -136,11 +135,12 @@ form > div{
 /* Chat div */
 
 #chat{
-	margin: 15px;
+	width: 100%;
 }
 
 #read{
 	overflow: hidden;
+	border-radius: 10px 10px 0 0;
 }
 
 .text-bubble{
@@ -155,13 +155,28 @@ form > div{
 	padding: 4px;
 }
 
-#write{
-	border-top: 1px solid grey;
+#write-message-div{
+	width: 100%;
+
+	position: relative;
+	display: inline-block;
 }
 
-#send-message-div{
-	display: flex;
-	justify-content: right;
+
+#message{
+	border-radius: 0 0 10px 10px;
+	border-width: 2px 0 0 0;
+
+	height: 100px;
+	width: 100%;
+	resize: none;
+}
+
+#send-message{
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+
 }
 
 /* Authentication pages */

@@ -6,7 +6,7 @@ from datetime import date, time
 
 # Form
 
-from .models import Schedule
+from .models import Schedule, Message
 from django import forms
 
 class ScheduleForm(forms.ModelForm):
@@ -20,6 +20,11 @@ class ScheduleForm(forms.ModelForm):
             "end_of_work_2",
             "sick",
             "vacation")
+
+class MassageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ("body",)
 
 # Create your views here.
 
@@ -102,3 +107,9 @@ def schedule(request):
             "schedule_form": schedule_form,
         },
     )
+
+def message(request):
+    
+
+    if request.method == "POST":
+        print("Recived a post request")
