@@ -22,7 +22,7 @@
         <div id="edit-schedule">
     
         {% if user.is_superuser %}
-            <form id="scheduleForm" method="post" action="{% url 'schedule'%}">
+            <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="form" value="schedule">
                 {% csrf_token %}
                 <div>
                     <div>
@@ -149,14 +149,17 @@
                     </div>
                 </div>
                 <div id="write-message-div">
-                <form id="messageForm" method="post" action="{% url 'message'%}">
-                    <textarea id="message" name="message" placeholder="..." rows="3">
-                    </textarea>
-                    <button id="send-message" class="btn">Send</button>
+                <form id="messageForm" method="post" action="{% url 'schedule'%}" name="form" value="message">
+                    {% csrf_token %}
+                    <textarea id="message" name="body" placeholder="..." rows="3"></textarea>
+                    <button type="submit" id="send-message" class="btn">Send</button>
                 </div>
                 </form>
             </div>
         </div>
+        <script id="messages-data" type="application/json">
+            {{ messages|safe }}
+        </script>
         <script src="{% static 'js/script.js' %}"></script>
     {% else %}
     <div id="account-container">

@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded",function(){
 	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
 
 	loadEmployeesToEditSchedule();
+
+	const messages = JSON.parse(document.getElementById("messages-data").textContent);
+	console.log(messages);
 })
 
 function loadSchedule(datesOfTheWeek){
