@@ -14,9 +14,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
 
 	loadEmployeesToEditSchedule();
-
-	const messages = JSON.parse(document.getElementById("messages-data").textContent);
-	console.log(messages);
+	loadMessages();
 })
 
 function loadSchedule(datesOfTheWeek){
@@ -320,4 +318,30 @@ function changeWeek(change){
 
 	loadSchedule(datesOfTheWeek);
 	// Create the new schedule
+}
+
+function loadMessages(){
+	let read = document.getElementById("read");
+	let nodle = [];
+	let i = 0;
+	const messages = JSON.parse(document.getElementById("messages-data").textContent);
+	const employees = JSON.parse(document.getElementById("users-data").textContent);
+	let name="";
+	
+	messages.forEach((message)=>{
+		employees.forEach((employee)=>{
+			if(employee.id==message.user){
+				name = employee.username;
+				console.log(message);
+			}
+		})
+		nodle.push(document.createElement("div"));
+		nodle[i].innerHTML = `<div class=text-bubble>
+            <p class="message-sender">${name}<p>
+            <p class="message-body">${message.body}</p>
+            <p class="message-date">${message.created_on}<p>
+            </div>`
+		read.appendChild(nodle[i]);
+	i++;	
+	});
 }

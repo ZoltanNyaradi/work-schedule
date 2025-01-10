@@ -45,7 +45,7 @@ def schedule(request):
 
     for message in messages:
         if isinstance(message["created_on"], datetime):  # Convert date to string
-            message["created_on"] = message["created_on"].strftime("%Y-%m-%d/%H:%M:%S")
+            message["created_on"] = message["created_on"].strftime("%Y-%m-%d %H:%M:%S")
     
     for schedule in schedules:
         if isinstance(schedule["date"], date):  # Convert date to string
@@ -98,7 +98,6 @@ def schedule(request):
                         user = schedule_form.cleaned_data["user"].id,
                         date = schedule_form.cleaned_data["date"]).delete()
                     print("shift deleted")
-
             else:
                 print("form is not valid") 
         else:
@@ -124,7 +123,7 @@ def schedule(request):
         {
             'users': json.dumps(users),
             "schedules": json.dumps(schedules),
-            "messages":json.dumps(messages),
+            "messages": json.dumps(messages),
             "schedule_form": schedule_form,
         },
     )
