@@ -1,5 +1,5 @@
 /* Background-colors */
-body, #schedule, #read, #write, #message{
+body, #schedule, #read, #write, #message, .edit-schedule-input{
 	background-color: #EEEEFF; /* White */
 }
 
@@ -193,10 +193,8 @@ form > div{
 	margin:40px 0;
 }
 
-#edit-schedule-form input[type=text],
-#edit-schedule-form input[type=date],
-#edit-schedule-form input[type=time]{
-	border-radius: 8px;
+.edit-schedule-input{
+	border-radius: 5px;
 }
 
 .auth_form > p{

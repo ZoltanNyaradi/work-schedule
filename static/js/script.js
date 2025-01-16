@@ -1,34 +1,57 @@
 document.addEventListener("DOMContentLoaded",function(){
+	
 	loadSchedule(loadDatesOfTheWeek());
-	loadToday();
+	// Load the schedule on the screen
+
 	document.getElementById("previous").addEventListener("click",(event)=>{changeWeek(-6)});
 	document.getElementById("next").addEventListener("click",(event)=>{changeWeek(+8)});
 
+	if (document.getElementById("edit-schedule").innerHTML!==""){
+		loadToday();
+		// Load the current date to edit-schedule
 
-	document.getElementById("employee-name").addEventListener("blur",(event)=>{nameCheck()});
-	let shiftClass = document.getElementsByClassName("shift");
-	for(let i=0; i<4; i++){
-		shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
-	}
-	document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
-	document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
-
+		let shiftClass = document.getElementsByClassName("shift");
+		for(let i=0; i<4; i++){
+			shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
+		}
+		document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
+		document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
+	
 	loadEmployeesToEditSchedule();
+	}
+
 	loadMessages();
+
+
 })
 
 function loadSchedule(datesOfTheWeek){
 	/***
-	 * Load the schedule table on the screen. 
+	 * Load the schedule table on the screen
 	 */
+	
 	let schedule = document.getElementById("schedule");
+	// Asign variable for schedule div
 	let row = [];
+	// Declare an array for rows
 	let column = [];
+	// Declare an array for columns
 	let cell = [];
+	// Declare an array for cells
 	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
+	// Declare an array for days and fill it up
+	// First column for the employees,
+	// so the first variable will be an empty string
+	
 	let employees = loadEmployees();
+	// Declare an array for employees and fill it up
+	// The first element will be "" here as well
 	let numberOfEmployees = employees.length;
+	// Declare a variable to count the employees
+	
 	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
+	// Declare a matrix for shifts
+
 	
 
 	for(let i = 0; i < numberOfEmployees; i++){
@@ -93,9 +116,12 @@ function loadSchedule(datesOfTheWeek){
   					column[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
   						// Add this shift as a text to it
   					}
-  					column[i][j].addEventListener("click",(event)=>{
-  						fillForm(datesOfTheWeek[j], employees[i].id)
-  					});
+  					if(document.getElementById("edit-schedule").innerHTML!==""){
+	  					// Add event listener for every cell if the user is an admin
+	  					column[i][j].addEventListener("click",(event)=>{
+	  						fillForm(datesOfTheWeek[j], employees[i].id)
+	  					});
+  					}
   						// Fill employee and date to editSchedule 
   				}
 
@@ -104,52 +130,37 @@ function loadSchedule(datesOfTheWeek){
 }
 
 function loadEmployees(){
+	/**
+	 * Load emplyoees from database
+	 * Return them grouped
+	 */
 	const users = JSON.parse(document.getElementById('users-data').textContent);
-
-	differentGroups = [];
-
+	// Assign a variabble for users with json
+	groups = [];
+	// Declare an array for groups
 	users.forEach ((user) =>{
+		// Collect groups
 		if(user.is_staff){
 		group = user.groups;
-		if(!differentGroups.includes(group)){
-			differentGroups.push(group);}
+		if(!groups.includes(group)){
+			groups.push(group);}
 		}})
 
 	orderedUsers=[""];
+	// Declare an array for employees,
+	// Assign an empty string for the first one
 
-	differentGroups.forEach((group) =>{
+	groups.forEach((group) =>{
+		// Fill up the array grouped
 		users.forEach((user) =>{
 			if(group==user.groups && user.is_staff){
 				orderedUsers.push(user);
 			}
 		});
 	});
+
 	return orderedUsers;
-}
-
-function nameCheck(){
-	/**
-	 * Checks if the given name in edit-schedule exist in the database,
-	 * if not than an error message shows up. 
-	 * In case of correction the error message dissapears.
-	 */
-
-	// Get the name from the form
-	let name = document.getElementById("employee-name");
-	// Get employees' data
-	let employees = loadEmployees();
-	// Make a list of the names of emplyoees
-	let names = [];
-	employees.forEach((employee)=>{
-		names.push(employee.username);
-	});
-	// Hide or show the error message
-	let nameError = document.getElementById("name-error");
-	if (names.includes(name.value)){
-		nameError.hidden=true;
-	}else{
-		nameError.hidden=false;
-	}
+	// Return employees
 }
 
 function loadToday(){
@@ -157,98 +168,174 @@ function loadToday(){
 	 * Loads the current day into edit-schedule 
 	 */
 	const today = new Date().toISOString().slice(0, 10);
+	// Assign today date for a variable
 	document.getElementById("shift-date").value=today;
+	// Set the current day in edit-schedule
 }
 
 function klickToShift(){
-	let shiftClass = document.getElementsByClassName("shift");
+	/**
+	* Give a color for shift inputs,
+	* what shows that they are active
+	* Check out check-boxes in edit-schedule
+	*/
+	let shifts = document.getElementsByClassName("shift");
+	// Assign variable for shift inputs
 	for(let i=0; i<4; i++){
-		shiftClass[i].style.backgroundColor = "#FFFFFF";
+		// Set color to offwhite by shift inputs
+		shifts[i].style.backgroundColor = "#EEEEFF";
 	}
 	document.getElementById("vacation").checked=false;
+	// Check out vacation check-box
 	document.getElementById("sick").checked=false;
+	// Check out sick check-box
 }
 
 function klickToVacation(){
+	/**
+	 * Give an inactive color
+	 * and clear shift inputs
+	 * Check off sick check-box
+	 */
 	let shiftClass = document.getElementsByClassName("shift");
+	// Assign variable for shift inputs
 	for(let i=0; i<4; i++){
+		// Clear and color shift inputs
 		shiftClass[i].style.backgroundColor = "#EEEEFF88";
 		shiftClass[i].value = undefined;
 	}
 	document.getElementById("sick").checked=false;
+	// Check out sick check-box
 }
 
 function klickToSick(){
+	/**
+	 * Give an inactive color
+	 * and clear shift inputs
+	 * Check off vacation check-box
+	 */
 	let shiftClass = document.getElementsByClassName("shift");
+	// Assign variable for shift inputs
 	for(let i=0; i<4; i++){
+		// Clear and color shift inputs
 		shiftClass[i].style.backgroundColor = "#EEEEFF88";
 		shiftClass[i].value = undefined;
 	}
 	document.getElementById("vacation").checked=false;
+	// Check out vacation check-box
 }
 
 function loadEmployeesToEditSchedule(){
-	const employeesForDropdown = JSON.parse(document.getElementById('users-data').textContent);
-	i=0;
+	/**
+	 * Fill up employee-name
+	 * with the name of the emplyoees
+	 */
+	const users = JSON.parse(document.getElementById('users-data').textContent);
+	// Assign variable for users
+	let i=0;
+	// Assign an index variable 
 	let employeeName = document.getElementById("employee-name");
+	// Assign varaible for employee-name select
 	let options=[];
-	employeesForDropdown.forEach ((employeeForDropdown)=>{
-		options[i] = document.createElement("option");
-		options[i].value = employeeForDropdown.id;
-		options[i].text = employeeForDropdown.username;
-		if (employeeForDropdown.is_staff){
+	// Declare array for options
+
+	users.forEach ((user)=>{
+		if (user.is_staff){
+			// If someone is employee
+			options[i] = document.createElement("option");
+			// Create a new option
+			options[i].value = user.id;
+			// Add id as value
+			options[i].text = user.username;
+			// Add name as text 
 			employeeName.appendChild(options[i]);
+			// Add it to the select
 		}
 		i++;
+		// Increase the index value
 	})
 }
 
 function loadDatesOfTheWeek(){
+	/**
+	 * Return the current week's dates
+	 */
 	const date = new Date();
+	// Assign a date constant
 	let todayIs = date.getDay();
-
+	// Get the current day of the week
 	if (todayIs==0){
+		// Set the current monday's date
 		date.setDate(date.getDate()-6);
 	} else{
 		date.setDate(date.getDate()-todayIs+1)
 	}
 
 	let datesOfTheWeek = [];
+	// Declare a variable for dates
 	datesOfTheWeek.push("");
+	// Push an empty string for the first column
 	for (let i=0; i<7; i++){
+		// Fill up the array with dates
 		datesOfTheWeek.push(date.toISOString().slice(0, 10));
 		date.setDate(date.getDate()+1);
 	}
 	return datesOfTheWeek;
+	// Return the dates of the week
 }
 
 function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWeek){
+	/**
+	 * Loads shifts into the schedule
+	 */
 
 	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
+	// Assign a variable for schedules in database
 	let shiftsOfTheWeek = [];
+	// Declare an array for current weeks shifts
 	let shift = "";
+	// Declare a string for shifts
 	let shiftExist = false;
+	// Declare a boolean what shows if a is already exist
 
+	/* With the 2 outter loop
+		we iterate throw the schedule's shift cells
+		Then in the inner loop we check
+		if we find an existing shift for the related date and employee
+		then we write it in the schedule
+	*/
 	for (let i = 0; i<numberOfEmployees; i++){
-
+		// Iterate as much as employees are
 		shiftsOfTheWeek.push([]);
+		// Incrase the size of the Array
+
 		for (let j = 1; j<8; j++){
+			// Iterate 7 times, as there are 7 days
+			// Start from 1 because of indexing
 			shiftExist=false;
-			schedules.forEach((individuellSchedule)=>{
-				if(individuellSchedule.user==employees[i].id && individuellSchedule.date == datesOfTheWeek[j]){
+			// set back shiftExist to false
+			schedules.forEach((schedule)=>{
+				// Iterate through shifts
+				if(schedule.user==employees[i].id && schedule.date == datesOfTheWeek[j]){
+					// Is the shift from database has the same date and emplyoee name as the cell
 					shiftExist = true;
-					if(individuellSchedule.vacation==true){
+					// Such a schift exist
+					if(schedule.vacation==true){
+						// Set shift to "Vacation" if in the database this value is true
 						shift = "Vacation";
 					} else {
-						if (individuellSchedule.sick==true){
+						if (schedule.sick==true){
+							// Set shift to "Sick" if in the database this value is true
 							shift = "Sick";
 						} else {
-							shift = individuellSchedule.begin_of_work_1.slice(0,5) + "-" +
-							    individuellSchedule.end_of_work_1.slice(0,5);
+							// In other case get the shift time from the database
+							shift = schedule.begin_of_work_1.slice(0,5) + "-" +
+							    schedule.end_of_work_1.slice(0,5);
 
-							if(individuellSchedule.begin_of_work_2 != null){
-								shift += "<br class='shift-break'>"+ individuellSchedule.begin_of_work_2.slice(0,5) + "-" +
-							    individuellSchedule.end_of_work_2.slice(0,5);
+							if(schedule.begin_of_work_2 != null){
+							// If there is a second shift, then concat it to shift
+								shift += "<br class='shift-break'>"+ schedule.begin_of_work_2.slice(0,5) + "-" +
+							    schedule.end_of_work_2.slice(0,5);
 							}
 						}
 
@@ -258,15 +345,18 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 				
 			})
 			if(shiftExist){
+				// If shift was found push it into the matrix
 				shiftsOfTheWeek[i].push(shift);
 			} else {
+				// If not push an empty string to the matrix
 				shiftsOfTheWeek[i].push("");
 			}
 		}
 	}
 	shiftsOfTheWeek.shift();
+	// Remove the first row
 	return shiftsOfTheWeek
-
+	// Return the shifts
 }
 
 function fillForm(date, employee){
@@ -321,27 +411,41 @@ function changeWeek(change){
 }
 
 function loadMessages(){
+	/**
+	* Load messages from the database to the screen
+	*/
 	let read = document.getElementById("read");
-	let nodle = [];
+	// Assign variable for target div
+	let textBoubble = [];
+	// Declare array for text boubbles
 	let i = 0;
+	// Declare an indexvalue
 	const messages = JSON.parse(document.getElementById("messages-data").textContent);
+	// Assign constance for messages
 	const employees = JSON.parse(document.getElementById("users-data").textContent);
+	// Assign constance for users
 	let name="";
+	// Declare a variable for employees' name
 	
 	messages.forEach((message)=>{
+		// Go through the messages
 		employees.forEach((employee)=>{
+			/* Find the write of the message*/
 			if(employee.id==message.user){
 				name = employee.username;
-				console.log(message);
 			}
 		})
-		nodle.push(document.createElement("div"));
-		nodle[i].innerHTML = `<div class=text-bubble>
+		textBoubble.push(document.createElement("div"));
+		// Create a dive for the boubble
+		textBoubble[i].innerHTML = `<div class=text-bubble>
             <p class="message-sender">${name}<p>
             <p class="message-body">${message.body}</p>
             <p class="message-date">${message.created_on}<p>
             </div>`
-		read.appendChild(nodle[i]);
-	i++;	
+            // Fill up the boubble with writer, text, an creation time
+		read.appendChild(textBoubble[i]);
+		// Add it to the page
+	i++;
+	// Increase idex value	
 	});
 }

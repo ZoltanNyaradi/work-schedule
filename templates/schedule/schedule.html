@@ -4,7 +4,7 @@
 {% block content %}
 {% if user.is_authenticated %}
     {% if user.is_staff %}
-		<div id="schedule">
+        <div id="schedule">
             <div>
                 
             <div id="schedule-container" class="container">
@@ -19,37 +19,35 @@
                 </button>
             </div>
         </div>
-        <div id="edit-schedule">
-    
-        {% if user.is_superuser %}
+        <div id="edit-schedule">{% if user.is_superuser %}
             <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="form" value="schedule">
                 {% csrf_token %}
                 <div>
                     <div>
-                         <select id="employee-name" name="user" class="long-input">
+                         <select id="employee-name" name="user" class="long-input edit-schedul-input">
                         </select>
                     </div>
                     <div>
                         <label for="shift-date">Date: </label>
                         </br>
-                        <input class="long-input" type="date" id="shift-date" name="date">
+                        <input class="long-input edit-schedule-input" type="date" id="shift-date" name="date">
                     </div>
                     <div>
                         <label for="shift-start">Shift: </label>
                         </br>
                         <div class="shift-div">
-                            <input class="shift" type="time" id="shift-start" name="begin_of_work_1">
+                            <input class="shift edit-schedule-input" type="time" id="shift-start" name="begin_of_work_1">
                             <label for="shift-end">-</label>
-                            <input class="shift" type="time" id="shift-end" name="end_of_work_1">
+                            <input class="shift edit-schedule-input" type="time" id="shift-end" name="end_of_work_1">
                         </div>
                     </div>
                     <div>
-                        <label for="shift-start-2">2nd Shift: </label>
+                        <label for="shift-start-2 input">2nd Shift: </label>
                         </br>
                         <div class="shift-div">
-                            <input class="shift" type="time" id="shift-start-2" name="begin_of_work_2">
+                            <input class="shift edit-schedule-input" type="time" id="shift-start-2" name="begin_of_work_2">
                             <label for="shift-end-2">-</label>
-                            <input class="shift" type="time" id="shift-end-2" name="end_of_work_2">
+                            <input class="shift edit-schedule-input" type="time" id="shift-end-2" name="end_of_work_2">
                         </div>
                     </div>
                 </div>
@@ -69,14 +67,7 @@
                     <button name="edit-schedule-crud" id="delete-schedule" class="btn" type="submit" value="delete">Delete</button>
                 </div>
             </form>
-        <script id="users-data" type="application/json">
-            {{users|safe}}
-        </script> 
-        <script id="schedule-data" type="application/json">
-            {{ schedules|safe }}
-        </script>
-    {% endif %}
-        </div>
+    {% endif %}</div>
         <div id="chat">
             <div id="read-and-write">
                 <div id="read">
@@ -89,7 +80,13 @@
                 </div>
                 </form>
             </div>
-        </div>
+        </div>  
+        <script id="users-data" type="application/json">
+            {{users|safe}}
+        </script> 
+        <script id="schedule-data" type="application/json">
+            {{ schedules|safe }}
+        </script>
         <script id="messages-data" type="application/json">
             {{ messages|safe }}
         </script>
@@ -106,39 +103,39 @@
             </div>
         </div>
     </div>
-    {% endif %}
+{% endif %}
 {% else %}
-<div id="account-container">
-    <div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mt-3 offset-md-2">
-                    <h3>Wellcome!</h3>
-                    <p>Work Schedule the best way to write and read the schedule.</p>
+    <div id="account-container">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
+                        <h3>Wellcome!</h3>
+                        <p>Work Schedule the best way to write and read the schedule.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-8 mt-3 offset-md-2">
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
 
-                    <form method="post" action="{% url 'account_login' %}">
-                        {% csrf_token %}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                        <button class="btn btn-auth right" type="submit">Log In</button>
-                    </form>
-                    <form method="post" action="{% url 'account_signup' %}">
-                        {% csrf_token %}
-                        {% if redirect_field_value %}
-                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                        {% endif %}
-                        <button class="btn btn-auth right" type="submit">Sign Up</button>
-                    </form>
+                        <form method="post" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <button class="btn btn-auth right" type="submit">Log In</button>
+                        </form>
+                        <form method="post" action="{% url 'account_signup' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <button class="btn btn-auth right" type="submit">Sign Up</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 {% endif %}
 
-    {% endblock %}
+{% endblock %}
