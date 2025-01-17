@@ -20,8 +20,9 @@
             </div>
         </div>
         <div id="edit-schedule">{% if user.is_superuser %}
-            <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="form" value="schedule">
+            <form id="scheduleForm" method="post" action="{% url 'schedule'%}">
                 {% csrf_token %}
+                <input type="hidden" name="form" value="edit-schedule-form">
                 <div>
                     <div>
                          <select id="employee-name" name="user" class="long-input edit-schedul-input">
