@@ -139,8 +139,12 @@ form > div{
 }
 
 #read{
-	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: hidden;
 	border-radius: 10px 10px 0 0;
+
+	scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .text-bubble{

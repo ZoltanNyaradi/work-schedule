@@ -448,4 +448,7 @@ function loadMessages(){
 	i++;
 	// Increase idex value	
 	});
+
+	read.scrollTop = read.scrollHeight;
+	// Scroll down to the last massege
 }
