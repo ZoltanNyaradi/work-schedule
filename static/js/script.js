@@ -85,6 +85,8 @@ function loadSchedule(datesOfTheWeek){
   					// Add the proper day and date to it
   					column[i][j].appendChild(cell[i][j]);
   					// Add it to a column
+  					cell[i][j].classList.add("schedule-text");
+  					// Add class for the p element
   				}
   				else if(j==0){
   					// Else if it is the first column but not the first row
@@ -104,7 +106,9 @@ function loadSchedule(datesOfTheWeek){
   					cell[i][j].innerHTML = employees[i].username;
   					// Write an emplyoee's name in it
   					column[i][j].appendChild(cell[i][j]);
-  					// The cell to a column
+  					// Add cell to a column
+  					cell[i][j].classList.add("schedule-text");
+  					// Add class for the p element
   				}else{
   					// If it is neither first row or first column
   					if(shiftsOfTheWeek[i-1][j-1]===undefined){
@@ -113,8 +117,14 @@ function loadSchedule(datesOfTheWeek){
   						// Add an empty text to the cell
   					} else {
   						// If there is a related shift to the cell
-  					column[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
-  						// Add this shift as a text to it
+  						cell[i].push(document.createElement("p"))
+  						// Add a paragraph to the cell
+  						cell[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
+  						// Write shift into the schedule 
+  						column[i][j].appendChild(cell[i][j]);
+  						// Append shift in the schedule
+  						cell[i][j].classList.add("shift-text");
+  						// Add class for the paragraph
   					}
   					if(document.getElementById("edit-schedule").innerHTML!==""){
 	  					// Add event listener for every cell if the user is an admin
