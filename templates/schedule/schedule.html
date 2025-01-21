@@ -22,8 +22,9 @@
             <form id="scheduleForm" method="post" action="{% url 'schedule'%}">
                 {% csrf_token %}
                 <input type="hidden" name="form" value="edit-schedule-form">
-                <div>
+                <div id="schedule-form-div">
                     <div>
+                        <label for=employee-name>Employee: </label>
                          <select id="employee-name" name="user" class="long-input edit-schedul-input">
                         </select>
                     </div>

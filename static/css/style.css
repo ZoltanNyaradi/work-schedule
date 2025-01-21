@@ -144,13 +144,46 @@ footer{
 	display: flex;
 	flex-direction: column;
 }
-#scheduleForm > div{
+
+#schedule-form-div{
 	margin:15px;
-	width:35%;
+
+	width:auto;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-#submit-schedule{
-	width:100%;
+#schedule-form-div > div{
+	margin: 5px;
+
+  width: 50%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+#submit-schedule-div{
+	display: flex;
+	justify-content: center;
+}
+
+#quick-options{
+	display: flex;
+	justify-content: center;
+}
+
+#quick-options > div{
+	display: flex;
+}
+
+#submit-schedule-div > submit{
+	width: 100vw;
+}
+
+#submit-schedule-div > submit{
+	width:6vw;
 }
 
 /* Chat div */
@@ -343,15 +376,6 @@ footer{
 	.last-col{
 		border-bottom: 1px solid black;
 	}
-
-	#submit-schedule-div{
-		display: flex;
-		justify-content: space-between;
-	}
-	#submit-schedule-div > submit{
-		width:6vw;
-	}
-
 
 	/* Chat div */
 	#chat{
