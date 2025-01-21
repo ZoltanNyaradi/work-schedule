@@ -253,6 +253,12 @@ footer{
 
 #account-container {
   width: 100%;
+
+  padding: 4rem;
+}
+
+#account-container > div{
+	border-radius: 15px;
 }
 
 #account-container h3{
@@ -280,6 +286,10 @@ footer{
 
 .auth_form > p > input{
 	width: 65%;
+}
+
+.auth_form input{
+	border-radius: 8px;
 }
 
 .auth_form > ul, .helptext{
