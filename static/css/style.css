@@ -17,7 +17,7 @@ header, footer,
 	background-color: #FFC093; /* Light Orange */
 }
 
-/* Colors */
+/* Text Colors */
 p, h1, h3, #log-out, #account-container a, .btn, .text-bubble{
 	color: #EEEEFF; /* White */
 }
@@ -193,6 +193,8 @@ footer{
 /* Chat div */
 
 #chat{
+	border-top: 2px solid gray;
+		
 	width: 100%;
 }
 
@@ -410,7 +412,7 @@ footer{
 	}
 
 	#read-and-write{
-		margin: 2vh 15px;
+		margin: 2vh 15px;	
 	}
 
 	#read{
