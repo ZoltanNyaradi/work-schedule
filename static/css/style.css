@@ -19,11 +19,15 @@ header, footer,
 
 /* Colors */
 p, h1, h3, #log-out, #account-container a, .btn, .text-bubble{
-	color: #EEEEFF;
+	color: #EEEEFF; /* White */
+}
+
+.message-date, .message-sender{
+	color: #EEEEFFAA; /* Transparent white */
 }
 
 .shift-text{
-	color: #000000;
+	color: #000000;	/* Black */
 }
 
 /* General__________________________________________________ */
@@ -197,6 +201,9 @@ footer{
 	overflow-x: hidden;
 	border-radius: 10px 10px 0 0;
 
+	height: 80vh;
+
+	padding: 10px;
 	scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -206,11 +213,17 @@ footer{
 
 	display: inline-block;
 	border-radius: 10px;
+
+	padding: 6px;
 }
 
 .text-bubble > p{
 	margin: 0px;
-	padding: 4px;
+	padding: 0px;
+}
+
+.message-date{
+	font-size: .7rem;
 }
 
 #write-message-div{
