@@ -328,7 +328,34 @@ footer{
 	width: 100px;
 }
 
+/* Media query for 600px wide phones and biggers */
+@media screen and (min-width: 600px){
 
+	h1{
+		font-size: 1.9rem;
+	}
+
+	.schedule-text, .shift-text {
+  	font-size: 0.7rem;
+	}
+
+}
+
+/* Media query for tablets and bigger */
+@media screen and (min-width: 768px){
+
+	h1{
+		font-size: 2.125rem;
+	}
+
+	.schedule-text, .shift-text {
+  	font-size: .9rem;
+	}
+
+	#schedule-container > .row > .col {
+  height: 50px;
+  }
+}
 
 /* Media query______________________________________________ */
 @media screen and (min-width: 1024px){
@@ -336,6 +363,7 @@ footer{
 	#edit-schedule, #chat{
 		background-color: #FFAB5A;
 	}
+
 /* Sections_________________________________________________ */
 	/* Header */
 	header{
