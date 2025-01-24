@@ -16,8 +16,10 @@ document.addEventListener("DOMContentLoaded",function(){
 		}
 		document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
 		document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
-	
-	loadEmployeesToEditSchedule();
+
+		loadEmployeesToEditSchedule();
+
+		document.getElementById("scheduleForm").addEventListener("submit",(event)=>{checkShifts()});
 	}
 
 	loadMessages();
@@ -461,4 +463,70 @@ function loadMessages(){
 
 	read.scrollTop = read.scrollHeight;
 	// Scroll down to the last massege
+}
+
+function checkShifts(){
+	/**
+	 * Check if the shifts are filled
+	 * their startings and endings are in a correct order
+	 * If not send an error message
+	 * If yes send the form
+	 */
+
+	let time = []
+	// Declar an array for the times
+	time.push(document.getElementById("shift-start"));
+	// Write the first start in the array
+	time.push(document.getElementById("shift-end"));
+	// Write the first end in the array
+	time.push(document.getElementById("shift-start-2"));
+	// Write the second start in the array
+	time.push(document.getElementById("shift-end-2"));
+	// Write the second end in the array
+
+	if(time[0]=="" || time[1]==""){
+		event.preventDefault();
+			// Stop the form to submit
+	} else {
+		if(time[2].value!="" && time[3]!=""){
+			let timeInt = []
+			// Declar an arra to convert the times into int
+			for (let i=0; i<4; i++){
+				// Slice the number part and convert them to int
+				timeInt.push(parseInt(time[i].value.slice(0,2)+time[i].value.slice(3,5)));
+			}
+
+			for (let earlier=0; earlier<3; earlier++){
+				for (let later=1; earlier+later<4; later++){
+					// Take every parring situation
+
+					if(timeInt[earlier] >= timeInt[later]){
+						// Check if the earlier time start later
+						if(timeInt[earlier]-1000 < timeInt[later]){
+							// Check if the earlier time is not much bigger
+							// It is possible that, that is a night shift
+							event.preventDefault();
+							// Stop the form to submit
+							document.getElementById("shift-error").style.visibility = "visible";
+							// Show the error message
+						}else{
+							document.getElementById("shift-error").style.visibility = "hidden";
+							// Hide the error message
+						}
+					}else{
+						document.getElementById("shift-error").style.visibility = "hidden";
+						// Hide the error message
+					}
+				}
+			}
+		} else {
+			if(time[2]=="" || time[3]==""){
+				event.preventDefault();
+				// Stop the form to submit
+			} else {
+				// Only one shift
+			}
+			
+		}
+	}
 }
