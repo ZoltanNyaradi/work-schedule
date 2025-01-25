@@ -156,8 +156,6 @@ footer{
 #schedule-form-div{
 	margin:15px;
 
-	width:auto;
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -328,7 +326,7 @@ footer{
 	width: 100px;
 }
 
-/* Media query for 600px wide phones and biggers */
+/* Media query for 600px wide phones and biggers______________________________________________  */
 @media screen and (min-width: 600px){
 
 	h1{
@@ -341,7 +339,7 @@ footer{
 
 }
 
-/* Media query for tablets and bigger */
+/* Media query for tablets and bigger______________________________________________  */
 @media screen and (min-width: 768px){
 
 	h1{
@@ -357,7 +355,7 @@ footer{
   }
 }
 
-/* Media query______________________________________________ */
+/* Media query for pcs and bigger______________________________________________ */
 @media screen and (min-width: 1024px){
 	/* Background-Colors*/
 	#edit-schedule, #chat{
@@ -393,7 +391,12 @@ footer{
 
 	#schedule-container > .row > .col{
 		width: 6vw;
+		height: 40px;
 	}
+
+	.schedule-text, .shift-text {
+    font-size: .7rem;
+  }
 
 	/* Edit-schedule div */
 	#edit-schedule{
@@ -407,10 +410,19 @@ footer{
 	}
 
 	#edit-schedule-form > div {
-	  width: 80%;
-	}
-	#edit-schedule-form > div {
 	  width: 14vw;
+	}
+
+	#schedule-form-div > div {
+		width: 100%;
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	#shift-error{
+		font-size: .8rem;
+		margin-bottom: 1rem;
 	}
 
 	#name-error{
@@ -454,6 +466,7 @@ footer{
 	#read{
 		height: 56vh;
 	}
+
 	#write{
 		height: 10vh;
 	}
@@ -472,6 +485,7 @@ footer{
 		justify-content: center;
 		align-items: center;
 	}
+	
 	#account-container > div{
 		height: 80%;
 		width: 40%;
@@ -479,4 +493,16 @@ footer{
 		border-radius: 15px;
 	}
 
+}
+
+/* Media query for large screens______________________________________________ */
+@media screen and (min-width: 1680px){
+	
+	.schedule-text, .shift-text {
+  	font-size: 1rem;
+	}
+
+	#schedule-container > .row > .col {
+  	height: 55px;
+  }
 }
