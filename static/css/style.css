@@ -180,9 +180,13 @@ footer{
 }
 
 #quick-options{
+	place-self: center;
+  margin: 15px;
+
+	width: 50%;
+
 	display: flex;
 	justify-content: space-between;
-  margin: 15px;
 }
 
 #submit-schedule-div > submit{
@@ -426,6 +430,13 @@ footer{
 		font-size: 12px;
 		color: red;
 	}
+
+	#quick-options{
+		place-self: auto;
+	
+		width: 80%;
+	}
+
 	.long-input{
 		width: 14vw;
 	}
