@@ -5,28 +5,8 @@ from django.core.serializers import serialize
 from django.core.serializers import serialize
 import json
 from datetime import date, time, datetime
-
-# Form
-
+from .forms import ScheduleForm, MessageForm
 from .models import Schedule, Message
-from django import forms
-
-class ScheduleForm(forms.ModelForm):
-    class Meta:
-        model = Schedule
-        fields = ("user",
-            "date",
-            "begin_of_work_1",
-            "end_of_work_1",
-            "begin_of_work_2",
-            "end_of_work_2",
-            "sick",
-            "vacation")
-
-class MessageForm(forms.ModelForm):
-    class Meta:
-        model = Message
-        fields = ("body",)
 
 # Create your views here.
 
@@ -36,6 +16,7 @@ class MessageForm(forms.ModelForm):
     Render schedule, messages
 '''
 def schedule(request):
+
 
     # Get users
     users = list(User.objects.values('id','username', 'groups', 'is_staff'))
