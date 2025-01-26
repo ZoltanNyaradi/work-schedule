@@ -17,7 +17,6 @@ from .models import Schedule, Message
 '''
 def schedule(request):
 
-
     # Get users
     users = list(User.objects.values('id','username', 'groups', 'is_staff'))
     # Get messages

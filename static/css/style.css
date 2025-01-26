@@ -181,11 +181,8 @@ footer{
 
 #quick-options{
 	display: flex;
-	justify-content: center;
-}
-
-#quick-options > div{
-	display: flex;
+	justify-content: space-between;
+  margin: 15px;
 }
 
 #submit-schedule-div > submit{
