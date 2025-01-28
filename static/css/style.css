@@ -18,7 +18,7 @@ header, footer,
 }
 
 /* Text Colors */
-p, h1, h3, #log-out, #account-container a, .btn, .text-bubble{
+p, h1, h2, #log-out, #account-container a, .btn, .text-bubble{
 	color: #EEEEFF; /* White */
 }
 
