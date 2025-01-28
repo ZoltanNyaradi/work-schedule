@@ -33,6 +33,11 @@ p, h1, h3, #log-out, #account-container a, .btn, .text-bubble{
 #shift-error{
 	color: red;
 }
+/* Fonts */
+
+h1, p, button, label, input, select{
+	font-family: "Lexend Giga", serif;
+}
 
 /* General__________________________________________________ */
 
@@ -64,7 +69,7 @@ h1{
 }
 
 #log-out{
-	width:95px;
+	width: 120px;
 }
 
 /* Main */
@@ -140,7 +145,7 @@ footer{
 }
 
 .schedule-text, .shift-text{
-  font-size: 0.55rem;
+  font-size: 0.4rem;
 }
 
 #schedule-buttons{
@@ -324,7 +329,7 @@ footer{
 }
 
 #log-out-buttons button{
-	width: 100px;
+	width: 120px;
 }
 
 /* Media query for 600px wide phones and biggers______________________________________________  */
@@ -335,7 +340,7 @@ footer{
 	}
 
 	.schedule-text, .shift-text {
-  	font-size: 0.7rem;
+  	font-size: 0.65rem;
 	}
 
 }
@@ -348,7 +353,7 @@ footer{
 	}
 
 	.schedule-text, .shift-text {
-  	font-size: .9rem;
+  	font-size: .85rem;
 	}
 
 	#schedule-container > .row > .col {
@@ -396,7 +401,7 @@ footer{
 	}
 
 	.schedule-text, .shift-text {
-    font-size: .7rem;
+    font-size: .65rem;
   }
 
 	/* Edit-schedule div */
@@ -422,7 +427,7 @@ footer{
 	}
 
 	#shift-error{
-		font-size: .8rem;
+		font-size: .75rem;
 		margin-bottom: 1rem;
 	}
 
