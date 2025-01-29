@@ -494,12 +494,14 @@ function checkShifts(){
 			for (let i=0; i<4; i++){
 				// Slice the number part and convert them to int
 				timeInt.push(parseInt(time[i].value.slice(0,2)+time[i].value.slice(3,5)));
+				console.log(timeInt[i]);
 			}
 
 			for (let earlier=0; earlier<3; earlier++){
-				for (let later=1; earlier+later<4; later++){
+				console.log(timeInt[earlier]);
+				for (let later=earlier+1; later<4; later++){
 					// Take every parring situation
-
+					console.log(timeInt[later]+" later")
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
 						if(timeInt[earlier]-1000 < timeInt[later]){
