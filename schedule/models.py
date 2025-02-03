@@ -8,7 +8,7 @@ class Message(models.Model):
   """
   user = models.ForeignKey(
     User,
-    on_delete=models.PROTECT,
+    on_delete=models.CASCADE,
     related_name="message_writer")
   created_on = models.DateTimeField(auto_now_add=True)
   body = models.TextField()
@@ -22,7 +22,7 @@ class Schedule(models.Model):
   """
   user = models.ForeignKey(
     User,
-    on_delete=models.PROTECT,
+    on_delete=models.CASCADE,
     related_name="worker")
   date = models.DateField()
   begin_of_work_1 = models.TimeField(null=True, blank=True)
