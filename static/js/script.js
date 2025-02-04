@@ -390,21 +390,21 @@ function changeWeek(change){
 	let scheduleContainer = document.getElementById("schedule-container");
 	// Get the container of the schedule
 
-	const oldMonday = scheduleContainer.children[0].children[1].innerHTML.slice(14,25);
+	const oldMonday = scheduleContainer.children[0].children[1].innerHTML.slice(37,47);
 	// Get the date of the currently loaded monday
-	const year = oldMonday.slice(0,5);
+	const year = oldMonday.slice(0,4);
 	// Slice the year
-	const month = oldMonday.slice(6,8);
+	const month = oldMonday.slice(5,7);
 	// Slice the month
-	const day = oldMonday.slice(9);
+	const day = oldMonday.slice(8);
 	// Slice the day
-
 	let monday = new Date(year, month-1, day);
 	// Declare a date type version of monday
 	monday.setDate(monday.getDate() + change);
 	// Get the next or previous monday
 
 	let date = monday;
+	console.log(month);
 	// Declare a new variable for the iteration
 	let datesOfTheWeek = [""];
 	// Create an array for the new week

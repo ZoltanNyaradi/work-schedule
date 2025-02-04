@@ -144,6 +144,5 @@ def schedule(request):
             'users': json.dumps(users),
             "schedules": json.dumps(schedules),
             "messages": json.dumps(messages),
-            "schedule_form": schedule_form,
         },
     )
