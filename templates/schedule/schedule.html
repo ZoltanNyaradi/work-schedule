@@ -39,12 +39,12 @@
                     </div>
                     <div>
                         <label for="shift-date">Date: </label>
-                        </br>
+                        <br>
                         <input class="long-input edit-schedule-input" type="date" id="shift-date" name="date">
                     </div>
                     <div>
                         <label for="shift-start">Shift: </label>
-                        </br>
+                        <br>
                         <div class="shift-div">
                             <input class="shift edit-schedule-input" type="time" id="shift-start" name="begin_of_work_1">
                             <label for="shift-end">-</label>
@@ -52,8 +52,8 @@
                         </div>
                     </div>
                     <div>
-                        <label for="shift-start-2 input">2nd Shift: </label>
-                        </br>
+                        <label for="shift-start-2">2nd Shift: </label>
+                        <br>
                         <div class="shift-div">
                             <input class="shift edit-schedule-input" type="time" id="shift-start-2" name="begin_of_work_2">
                             <label for="shift-end-2">-</label>
@@ -90,12 +90,12 @@
                 <div id="read">
                 </div>
                 <div id="write-message-div">
-                <form id="messageForm" method="post" action="{% url 'schedule'%}" name="form" value="message">
-                    {% csrf_token %}
-                    <textarea id="message" name="body" placeholder="..." rows="3"></textarea>
-                    <button type="submit" id="send-message" class="btn">Send</button>
+                    <form id="messageForm" method="post" action="{% url 'schedule'%}" name="form">
+                        {% csrf_token %}
+                        <textarea id="message" name="body" placeholder="..." rows="3"></textarea>
+                        <button type="submit" id="send-message" class="btn">Send</button>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
     {% else %}
 
 <!-- Unauthorised user -->
-    <div id="account-container">
+    <div class="account-container">
         <div>
             <div class="container">
                 <div class="row">
@@ -130,7 +130,7 @@
 
 <!-- Loged out user -->
 {% else %}
-    <div id="account-container">
+    <div class="account-container">
         <div>
             <div class="container">
                 <div class="row">
@@ -145,14 +145,14 @@
                         <form method="post" action="{% url 'account_login' %}">
                             {% csrf_token %}
                             {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                             {% endif %}
                             <button class="btn btn-auth right" type="submit">Log In</button>
                         </form>
                         <form method="post" action="{% url 'account_signup' %}">
                             {% csrf_token %}
                             {% if redirect_field_value %}
-                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                             {% endif %}
                             <button class="btn btn-auth right" type="submit">Sign Up</button>
                         </form>
