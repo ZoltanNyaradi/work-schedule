@@ -461,7 +461,7 @@ function loadMessages(){
 	// Scroll down to the last massege
 }
 
-function checkShifts(){
+function checkShifts(event){
 	/**
 	 * Check if the shifts are filled
 	 * their startings and endings are in a correct order

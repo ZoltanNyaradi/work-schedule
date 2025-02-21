@@ -27,13 +27,14 @@
 
 <!-- Admin -->
 <!-- Edit Schedule -->
-        <div id="edit-schedule">{% if user.is_superuser %}
-            <form id="scheduleForm" method="post" action="{% url 'schedule'%}">
+{% if user.is_superuser %}
+        <div id="edit-schedule"><form></form>
+            <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="scheduleForm">
                 {% csrf_token %}
                 <input type="hidden" name="form" value="edit-schedule-form">
                 <div id="schedule-form-div">
                     <div>
-                        <label for=employee-name>Employee: </label>
+                        <label for="employee-name">Employee: </label>
                          <select id="employee-name" name="user" class="long-input edit-schedul-input">
                         </select>
                     </div>
@@ -69,11 +70,11 @@
                 <div id="quick-options">
                     <div>
                         <input type="radio" id="vacation" name="vacation">
-                        <label for="employee-name">Vacation: </label>
+                        <label for="vacation">Vacation: </label>
                     </div>
                     <div>
                         <input type="radio" id="sick" name="sick">
-                        <label for="employee-name">Sick: </label>
+                        <label for="sick">Sick: </label>
                     </div>
                 </div>
             
@@ -82,8 +83,8 @@
                     <button name="edit-schedule-crud" id="delete-schedule" class="btn" type="submit" value="delete">Delete</button>
                 </div>
             </form>
-    {% endif %}</div>
-
+        </div>
+{% endif %}
 <!-- Chat -->
         <div id="chat">
             <div id="read-and-write">
@@ -121,7 +122,7 @@
                 <div class="row">
                     <div class="col-md-8 mt-3 offset-md-2">
                         <p>Your account haven't been confirmed yet.</p>
-                     </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,7 +161,7 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 {% endif %}
 
 {% endblock %}
