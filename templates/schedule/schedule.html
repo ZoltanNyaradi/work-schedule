@@ -27,8 +27,7 @@
 
 <!-- Admin -->
 <!-- Edit Schedule -->
-{% if user.is_superuser %}
-        <div id="edit-schedule"><form></form>
+        <div id="edit-schedule">{% if user.is_superuser %}<form></form>
             <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="scheduleForm">
                 {% csrf_token %}
                 <input type="hidden" name="form" value="edit-schedule-form">
@@ -83,8 +82,7 @@
                     <button name="edit-schedule-crud" id="delete-schedule" class="btn" type="submit" value="delete">Delete</button>
                 </div>
             </form>
-        </div>
-{% endif %}
+        {% endif %}</div>
 <!-- Chat -->
         <div id="chat">
             <div id="read-and-write">
