@@ -4,7 +4,7 @@ body, #schedule, #read, #write, #message, .edit-schedule-input{
 }
 
 header, footer,
-#account-container > div,
+.account-container > div,
 .btn, .text-bubble, .first-row{
 	background-color: #5AAEFF; /* Blue */
 }
@@ -18,7 +18,7 @@ header, footer,
 }
 
 /* Text Colors */
-p, h1, h2, #log-out, #account-container a, .btn, .text-bubble{
+p, h1, h2, #log-out, .account-container a, .btn, .text-bubble{
 	color: #EEEEFF; /* White */
 }
 
@@ -27,7 +27,7 @@ p, h1, h2, #log-out, #account-container a, .btn, .text-bubble{
 }
 
 .shift-text{
-	color: #FF0000;	/* Black */
+	color: #000000;	/* Black */
 }
 
 #shift-error{
@@ -267,17 +267,17 @@ footer{
 
 /* Authentication pages */
 
-#account-container {
+.account-container {
   width: 100%;
 
   padding: 4rem;
 }
 
-#account-container > div{
+.account-container > div{
 	border-radius: 15px;
 }
 
-#account-container h3{
+.account-container h3{
 	margin-top:30px;
 }
 
@@ -493,7 +493,7 @@ footer{
 		justify-content: right;
 	}
 /* Authentication pages */
-	#account-container{
+	.account-container{
 		height: 84vh;
 
 		display: flex;
@@ -501,7 +501,7 @@ footer{
 		align-items: center;
 	}
 	
-	#account-container > div{
+	.account-container > div{
 		height: 80%;
 		width: 40%;
 

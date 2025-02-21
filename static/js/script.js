@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded",function(){
 	loadSchedule(loadDatesOfTheWeek());
 	// Load the schedule on the screen
 
-	document.getElementById("previous").addEventListener("click",(event)=>{changeWeek(-6)});
-	document.getElementById("next").addEventListener("click",(event)=>{changeWeek(+8)});
+	document.getElementById("previous").addEventListener("click",(event)=>{changeWeek(-6);});
+	document.getElementById("next").addEventListener("click",(event)=>{changeWeek(+8);});
 
 	if (document.getElementById("edit-schedule").innerHTML!==""){
 		loadToday();
@@ -12,20 +12,19 @@ document.addEventListener("DOMContentLoaded",function(){
 
 		let shiftClass = document.getElementsByClassName("shift");
 		for(let i=0; i<4; i++){
-			shiftClass[i].addEventListener("click",(event)=>{klickToShift()});
+			shiftClass[i].addEventListener("click",(event)=>{klickToShift();});
 		}
-		document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation()});
-		document.getElementById("sick").addEventListener("click",(event)=>{klickToSick()});
+		document.getElementById("vacation").addEventListener("click",(event)=>{klickToVacation();});
+		document.getElementById("sick").addEventListener("click",(event)=>{klickToSick();});
 
 		loadEmployeesToEditSchedule();
 
-		document.getElementById("scheduleForm").addEventListener("submit",(event)=>{checkShifts()});
+		document.getElementById("scheduleForm").addEventListener("submit",(event)=>{checkShifts();});
 	}
 
 	loadMessages();
 
-
-})
+});
 
 function loadSchedule(datesOfTheWeek){
 	/***
@@ -74,7 +73,7 @@ function loadSchedule(datesOfTheWeek){
   				// Make a column for the emplyoees and 7 for the days of the week
   				column[i][j].classList.add("col");
   				// Add col class to them
-  				row[i].appendChild(column[i][j])
+  				row[i].appendChild(column[i][j]);
   				// Add the columns to a row
 
   				if(i==0){
@@ -119,7 +118,7 @@ function loadSchedule(datesOfTheWeek){
   						// Add an empty text to the cell
   					} else {
   						// If there is a related shift to the cell
-  						cell[i].push(document.createElement("p"))
+  						cell[i].push(document.createElement("p"));
   						// Add a paragraph to the cell
   						cell[i][j].innerHTML = shiftsOfTheWeek[i-1][j-1];
   						// Write shift into the schedule 
@@ -131,7 +130,7 @@ function loadSchedule(datesOfTheWeek){
   					if(document.getElementById("edit-schedule").innerHTML!==""){
 	  					// Add event listener for every cell if the user is an admin
 	  					column[i][j].addEventListener("click",(event)=>{
-	  						fillForm(datesOfTheWeek[j], employees[i].id)
+	  						fillForm(datesOfTheWeek[j], employees[i].id);
 	  					});
   					}
   						// Fill employee and date to editSchedule 
@@ -148,17 +147,17 @@ function loadEmployees(){
 	 */
 	const users = JSON.parse(document.getElementById('users-data').textContent);
 	// Assign a variabble for users with json
-	groups = [];
+	let groups = [];
 	// Declare an array for groups
 	users.forEach ((user) =>{
 		// Collect groups
 		if(user.is_staff){
-		group = user.groups;
+		let group = user.groups;
 		if(!groups.includes(group)){
 			groups.push(group);}
-		}})
+		}});
 
-	orderedUsers=[""];
+	let orderedUsers=[""];
 	// Declare an array for employees,
 	// Assign an empty string for the first one
 
@@ -265,7 +264,7 @@ function loadEmployeesToEditSchedule(){
 		}
 		i++;
 		// Increase the index value
-	})
+	});
 }
 
 function loadDatesOfTheWeek(){
@@ -280,7 +279,7 @@ function loadDatesOfTheWeek(){
 		// Set the current monday's date
 		date.setDate(date.getDate()-6);
 	} else{
-		date.setDate(date.getDate()-todayIs+1)
+		date.setDate(date.getDate()-todayIs+1);
 	}
 
 	let datesOfTheWeek = [];
@@ -350,12 +349,9 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 							    schedule.end_of_work_2.slice(0,5);
 							}
 						}
-
 					}					
 				}
-
-				
-			})
+			});
 			if(shiftExist){
 				// If shift was found push it into the matrix
 				shiftsOfTheWeek[i].push(shift);
@@ -367,7 +363,7 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 	}
 	shiftsOfTheWeek.shift();
 	// Remove the first row
-	return shiftsOfTheWeek
+	return shiftsOfTheWeek;
 	// Return the shifts
 }
 
@@ -446,14 +442,14 @@ function loadMessages(){
 			if(employee.id==message.user){
 				name = employee.username;
 			}
-		})
+		});
 		textBoubble.push(document.createElement("div"));
 		// Create a dive for the boubble
 		textBoubble[i].innerHTML = `<div class=text-bubble>
             <p class="message-sender">${name}<p>
             <p class="message-body">${message.body}</p>
             <p class="message-date">${message.created_on}<p>
-            </div>`
+            </div>`;
             // Fill up the boubble with writer, text, an creation time
 		read.appendChild(textBoubble[i]);
 		// Add it to the page
@@ -473,7 +469,7 @@ function checkShifts(){
 	 * If yes send the form
 	 */
 
-	let time = []
+	let time = [];
 	// Declar an array for the times
 	time.push(document.getElementById("shift-start"));
 	// Write the first start in the array
@@ -489,7 +485,7 @@ function checkShifts(){
 			// Stop the form to submit
 	} else {
 		if(time[2].value!="" && time[3]!=""){
-			let timeInt = []
+			let timeInt = [];
 			// Declar an arra to convert the times into int
 			for (let i=0; i<4; i++){
 				// Slice the number part and convert them to int
@@ -501,7 +497,7 @@ function checkShifts(){
 				console.log(timeInt[earlier]);
 				for (let later=earlier+1; later<4; later++){
 					// Take every parring situation
-					console.log(timeInt[later]+" later")
+					console.log(timeInt[later]+" later");
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
 						if(timeInt[earlier]-1000 < timeInt[later]){
