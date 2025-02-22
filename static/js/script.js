@@ -32,7 +32,7 @@ function loadSchedule(datesOfTheWeek){
 	 */
 	
 	let schedule = document.getElementById("schedule");
-	// Asign variable for schedule div
+	// Assign variable for schedule div
 	let row = [];
 	// Declare an array for rows
 	let column = [];
@@ -70,7 +70,7 @@ function loadSchedule(datesOfTheWeek){
 
   			for(let j = 0; j < 8; j++){
   				column[i].push(document.createElement("div"));
-  				// Make a column for the emplyoees and 7 for the days of the week
+  				// Make a column for the employees and 7 for the days of the week
   				column[i][j].classList.add("col");
   				// Add col class to them
   				row[i].appendChild(column[i][j]);
@@ -105,7 +105,7 @@ function loadSchedule(datesOfTheWeek){
   					cell[i].push(document.createElement("p"));
   					// Add a paragraph to the cell
   					cell[i][j].innerHTML = employees[i].username;
-  					// Write an emplyoee's name in it
+  					// Write an employee’s name in it
   					column[i][j].appendChild(cell[i][j]);
   					// Add cell to a column
   					cell[i][j].classList.add("schedule-text");
@@ -142,11 +142,11 @@ function loadSchedule(datesOfTheWeek){
 
 function loadEmployees(){
 	/**
-	 * Load emplyoees from database
+	 * Load employees from database
 	 * Return them grouped
 	 */
 	const users = JSON.parse(document.getElementById('users-data').textContent);
-	// Assign a variabble for users with json
+	// Assign a variable for users with Json
 	let groups = [];
 	// Declare an array for groups
 	users.forEach ((user) =>{
@@ -193,7 +193,7 @@ function klickToShift(){
 	let shifts = document.getElementsByClassName("shift");
 	// Assign variable for shift inputs
 	for(let i=0; i<4; i++){
-		// Set color to offwhite by shift inputs
+		// Set color to off-white by shift inputs
 		shifts[i].style.backgroundColor = "#EEEEFF";
 	}
 	document.getElementById("vacation").checked=false;
@@ -239,14 +239,14 @@ function klickToSick(){
 function loadEmployeesToEditSchedule(){
 	/**
 	 * Fill up employee-name
-	 * with the name of the emplyoees
+	 * with the name of the employees
 	 */
 	const users = JSON.parse(document.getElementById('users-data').textContent);
 	// Assign variable for users
 	let i=0;
 	// Assign an index variable 
 	let employeeName = document.getElementById("employee-name");
-	// Assign varaible for employee-name select
+	// Assign variable for employee-name select
 	let options=[];
 	// Declare array for options
 
@@ -309,7 +309,7 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 	let shiftExist = false;
 	// Declare a boolean what shows if a is already exist
 
-	/* With the 2 outter loop
+	/* With the 2 outer loop
 		we iterate throw the schedule's shift cells
 		Then in the inner loop we check
 		if we find an existing shift for the related date and employee
@@ -318,7 +318,7 @@ function loadSchiftOfTheWeek(monday, numberOfEmployees, employees, datesOfTheWee
 	for (let i = 0; i<numberOfEmployees; i++){
 		// Iterate as much as employees are
 		shiftsOfTheWeek.push([]);
-		// Incrase the size of the Array
+		// Increase the size of the Array
 
 		for (let j = 1; j<8; j++){
 			// Iterate 7 times, as there are 7 days
@@ -387,7 +387,7 @@ function changeWeek(change){
 	// Get the container of the schedule
 
 	const oldMonday = scheduleContainer.children[0].children[1].innerHTML.slice(37,47);
-	// Get the date of the currently loaded monday
+	// Get the date of the currently loaded Monday
 	const year = oldMonday.slice(0,4);
 	// Slice the year
 	const month = oldMonday.slice(5,7);
@@ -395,9 +395,9 @@ function changeWeek(change){
 	const day = oldMonday.slice(8);
 	// Slice the day
 	let monday = new Date(year, month-1, day);
-	// Declare a date type version of monday
+	// Declare a date type version of Monday
 	monday.setDate(monday.getDate() + change);
-	// Get the next or previous monday
+	// Get the next or previous Monday
 
 	let date = monday;
 	console.log(month);
@@ -425,9 +425,9 @@ function loadMessages(){
 	let read = document.getElementById("read");
 	// Assign variable for target div
 	let textBoubble = [];
-	// Declare array for text boubbles
+	// Declare array for text bubbles
 	let i = 0;
-	// Declare an indexvalue
+	// Declare an index value
 	const messages = JSON.parse(document.getElementById("messages-data").textContent);
 	// Assign constance for messages
 	const employees = JSON.parse(document.getElementById("users-data").textContent);
@@ -450,15 +450,15 @@ function loadMessages(){
             <p class="message-body">${message.body}</p>
             <p class="message-date">${message.created_on}<p>
             </div>`;
-            // Fill up the boubble with writer, text, an creation time
+            // Fill up the bubble with writer, text, an creation time
 		read.appendChild(textBoubble[i]);
 		// Add it to the page
 	i++;
-	// Increase idex value	
+	// Increase index value	
 	});
 
 	read.scrollTop = read.scrollHeight;
-	// Scroll down to the last massege
+	// Scroll down to the last massage
 }
 
 function checkShifts(event){
@@ -470,7 +470,7 @@ function checkShifts(event){
 	 */
 
 	let time = [];
-	// Declar an array for the times
+	// Declare an array for the times
 	time.push(document.getElementById("shift-start"));
 	// Write the first start in the array
 	time.push(document.getElementById("shift-end"));
@@ -486,7 +486,7 @@ function checkShifts(event){
 	} else {
 		if(time[2].value!="" && time[3]!=""){
 			let timeInt = [];
-			// Declar an arra to convert the times into int
+			// Declare an array to convert the times into int
 			for (let i=0; i<4; i++){
 				// Slice the number part and convert them to int
 				timeInt.push(parseInt(time[i].value.slice(0,2)+time[i].value.slice(3,5)));

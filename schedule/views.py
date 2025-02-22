@@ -30,7 +30,7 @@ def schedule(request):
         "sick",
         "vacation"))
 
-    # Change created_on's format suitable for json
+    # Change created_on's format suitable for Json
     for message in messages:
         # Convert date to string
         if isinstance(message["created_on"], datetime):
@@ -38,7 +38,7 @@ def schedule(request):
                 "%Y-%m-%d %H:%M:%S"
             )
 
-    # Change schedule's date and times' format suitable for json
+    # Change schedule's date and times' format suitable for Json
     for schedule in schedules:
         if isinstance(schedule["date"], date):
             # Convert date to string
@@ -73,7 +73,7 @@ def schedule(request):
 
         # Handle edit-schedule-form
         if form_name == "edit-schedule-form":
-            # Get which button was klicked
+            # Get which button was clicked
             edit_schedule_crud = request.POST.get("edit-schedule-crud")
             # Get inputs
             s_form = ScheduleForm(data=request.POST)
