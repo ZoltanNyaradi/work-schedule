@@ -27,7 +27,7 @@
 
 <!-- Admin -->
 <!-- Edit Schedule -->
-        <div id="edit-schedule">{% if user.is_superuser %}<form></form>
+        <div id="edit-schedule">{% if user.is_superuser %}
             <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="scheduleForm">
                 {% csrf_token %}
                 <input type="hidden" name="form" value="edit-schedule-form">
@@ -146,7 +146,7 @@
                             {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
                             {% endif %}
-                            <button class="btn btn-auth right" type="submit">Log In</button>
+                            <button class="btn btn-auth right" type="submit">Sign In</button>
                         </form>
                         <form method="post" action="{% url 'account_signup' %}">
                             {% csrf_token %}

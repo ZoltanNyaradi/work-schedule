@@ -40,8 +40,7 @@
 	<header>
 	    <h1>Best Company Work Schedule</h1>
         {% if user.is_authenticated %}
-        <form class="nav-link" method="post" action="{% if request.path == logout_url %}active{% endif %} {% url 'account_logout' %}">
-        <button id="log-out" class="btn btn-auth">Sign Out</button>        
+        <a class="nav-link btn btn-auth" href="{% url 'account_logout' %}">Sign Out</a>      
         {%endif%}
 	</header>
 <!-- Main -->
