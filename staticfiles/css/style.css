@@ -355,12 +355,16 @@ footer{
 	}
 
 	.schedule-text, .shift-text {
-  	font-size: .75rem;
+  	font-size: .7rem;
 	}
 
 	#schedule-container > .row > .col {
   height: 50px;
   }
+}
+
+#shift-error{
+		font-size: .6rem;
 }
 
 /* Media query for pcs and bigger______________________________________________ */
@@ -403,7 +407,7 @@ footer{
 	}
 
 	.schedule-text, .shift-text {
-    font-size: .65rem;
+    font-size: .6rem;
   }
 
 	/* Edit-schedule div */
@@ -429,7 +433,7 @@ footer{
 	}
 
 	#shift-error{
-		font-size: .5rem;
+		font-size: .8rem;
 		margin-bottom: 1rem;
 	}
 

@@ -26,7 +26,7 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 SECRET_KEY = 'hsdiIOJD?=§)RFjf0§F)=§FUGJJEfjedg0J(EG(=uhg0=FDSF)DSF)D'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1",'.herokuapp.com']
 

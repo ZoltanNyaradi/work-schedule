@@ -463,7 +463,7 @@ function loadMessages(){
 	// Scroll down to the last massage
 }
 
-function checkShifts(event){
+function checkShifts(){
 	/**
 	 * Check if the shifts are filled
 	 * their startings and endings are in a correct order
@@ -493,7 +493,6 @@ function checkShifts(event){
 				// Slice the number part and convert them to int
 				timeInt.push(parseInt(time[i].value.slice(0,2)+time[i].value.slice(3,5)));
 			}
-
 			for (let earlier=0; earlier<3; earlier++){
 				for (let later=earlier+1; later<4; later++){
 					// Take every parring situation
