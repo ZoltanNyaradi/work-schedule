@@ -1,131 +1,364 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Work Schedule
 
-Welcome USER_NAME,
+![Work Schedule](documentation/README/work-schedule.png)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Do you write the schedule for your coworkers in a usual spreadsheet? Are you missing specified features fir schedule writing and the existing features are just too time consuming to implement them. Here is the solution to your problem. Work Schedule gives you a clean site with build in feathers, what makes scheduling easier and faster. Implement in your company as well.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+## Contents
 
-## Gitpod Reminders
+* [Design](#design)
+  * [Color Scheme](#color-scheme)
+  * [Typography](#typography)
+  * [Favicon](#favicon)
+  * [Wireframe](#wireframe)
+* [Feathers](#feathers)
+  * [Authentication Pages](#authentication-pages)
+    * [Welcome](#welcome)
+    * [Sign Up](#sign-up)
+    * [User is not Authenticated](#user-is-not-authenticated)
+    * [Sign In](#sign-in)
+    * [Sign Out](#sign-out)
+  * [Admin Rights](#admin-rights)
+    * [Accept User Application](#accept-user-application)
+    * [Add Admin Rights](#add-admin-rights)
+    * [Groups](#groups)
+    * [Delete User](#delete-user)
+    * [Other Django Admin Options](#other-django-admin-options)
+  * [Sign Out Button](#sign-out-button)
+  * [Schedule](#schedule)
+    * [Previous-and-Next](#previous-and-next)
+    * [Edit Schedule](#edit-schedule)
+    * [Shift Types](#shift-types)
+    * [Quick Fill](#quick-fill)
+    * [Check Shift Correctness](#check-shift-correctness)
+  * [Chat](#chat)
+  * [Logged In User](#logged-in-user)
+  * [Future Implementations](#future-implementations)
+* [Technologies Used](#technologies-used)
+  * [Languages Used](#languages-used)
+  * [Used Programs](#used-programs)
+* [Deployment & Local Development](#deployment--local-development)
+  * [Deployment](#deployment)
+  * [Local Development](#local-development)
+    * [How to Fork](#how-to-fork)
+    * [How to Clone](#how-to-clone)
+* [Testing](#testing)
+  * [Detailed Testing](#detailed-testing)
+  * [Fixed Bugs](#fixed-bugs)
+  * [Test With Software](#test-with-software)
+    * [HTML Validator](#html-validator)
+    * [CSS Validator](#css-validator)
+    * [JS Validator](#js-validator)
+    * [PEP 8 Style Checker](#pep-8-style-checker)
+    * [Google Lighthouse](#google-lighthouse)
+* [Credits](#credits)
+  * [Code Sources](#code-sources)
+    * [Convert Datetime](#convert-datetime)
+    * [Find Existing Record](#find-existing-record)
+    * [Return JSON](#return-json)
+  * [Acknowledgements](#acknowledgements)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## Design
 
-`python3 -m http.server`
+### Color Scheme
 
-A blue button should appear to click: _Make Public_,
+* #EEEEFF was used for the main background and for text color when the background has an other color.
+* #5AAEFF is the secondary background. It is used at Hader, Footer, buttons.
+* #FFAB5A is the color for side panels, for #edit-schedule on every screen size, for buttons and also used in the table.
+* #FFC093 was used in the table to differentiate the groups.
+* #EEEEFFAA is the color for the author and the date for messages.
+* #000000 is the main text color on white background, also used for drawing the table.
 
-Another blue button should appear to click: _Open Browser_.
+![Color Codes](documentation/README/color-scheme.png)
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+### Typography
 
-A blue button should appear to click: _Make Public_,
+Lexend Giga was used as font-family from Google Fonts.
 
-Another blue button should appear to click: _Open Browser_.
+![Lexend Giga](documentation/README/lexend-giga.png)
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-To log into the Heroku toolbelt CLI:
+### Favicon
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+The favicon is a calendar from [flaticon.com](https://www.flaticon.com/free-icon/schedule_3652191?term=schedule&page=1&position=1&origin=search&related_id=3652191).
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+![favicon](documentation/README/favicon.png)
 
-### Connecting your Mongo database
+### Wireframe
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
+There are two kinds of pages on the site one is the authentication the other is the schedule.
 
-------
+![Auth Mobile](documentation/README/auth-mobile.png)
+![Schedule Mobile](documentation/README/schedule-mobile.png)
+![Auth Screen](documentation/README/auth-screen.png)
+![Schedule Screen](documentation/README/schedule-screen.png)
 
-## Release History
+## Feathers
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Authentication Pages
 
-**June 18, 2024,** Add Mongo back into template
+Authentication pages are where the user haven't reached the main content jet. They have the same layout.
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+#### Welcome
 
-**May 28 2024:** Fix Mongo and Links installs
+If the user isn't logged in, then as he loads the home page a welcome message appears. The user has two options. Either go to log in or to sign in.
 
-**April 26 2024:** Update node version to 16
+![Welcome](documentation/README/welcome.png)
 
-**September 20 2023:** Update Python version to 3.9.17.
+#### Sign Up
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+Here the user has the possibility to Sign Up with name, password and email optionally. Other option is to go to sign in page.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+![Sign Up](documentation/README/sign-up.png)
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+#### User is not Authenticated
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+When the user signs up, or sign in but isn't approved yet, then a message appear that the user isn't approved yet. 
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+#### Sign In
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+The user can enter on the sign in page with a username and a password. 
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+![Sign In](documentation/README/sign-in.png)
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+#### Sign Out
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+If the user clicks on the sign out button then the sign out page appears, where the user can confirm the action or go back to the content.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+![Sign Out](documentation/README/sign-out.png)
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+### Admin Rights
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+Superusers/ chiefs have the possibility to use the django admin page. The necessary functions are below.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+#### Accept User Application
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+Superusers can give staff status. That means the chief approve that the user really works for the company and after the approval the user as an employee can access the schedule.
 
-------
+![Staff Status](documentation/README/staff-status.png)
 
-## FAQ about the uptime script
+#### Add Admin Rights
 
-**Why have you added this script?**
+Superuser can give superuser status in case of the boss is leaving the company and a new one comes or in case of bigger companies it is possible that there are more employee in higher position, who need the right to write the schedule.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+![Superuser Status](documentation/README/superuser-status.png)
 
-**How will this affect me?**
+#### Groups
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+Superuser can create, delete groups, and add group for users. The groups symbolize the position of the employee. In the schedule they are grouped by their positions, so that easier for the schedule writer to compare the employees' schedule in the same or in similar position.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+![Groups](documentation/README/groups.png)
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+#### Delete User
 
-**So….?**
+User can be deleted. It is equant that, that the employee leaves the company.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+![Delete User](documentation/README/delete-user.png)
 
-**Can I opt out?**
+#### Other Django Admin Options
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+The superusers have some other options in case but normally they should be able to work without them. Some of them most of the time just not that useful, some of them just supposed to do from the main page. But in some special cases can be still useful.
+* Create user
+* Edit user data, password
+* List users with filter
+* Add different rights for users
+* Create, edit, delete messages
+* Create, edit, delete schedule
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+![Other Django Admin Options](documentation/README/other-django-admin-options.png)
 
-**Anything more?**
+### Sign Out Button
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+If the user is signed in, then a sign out button is available in the header. It leads to sign out page.
 
----
+![Sign Out Button](documentation/README/sign-out-button.png)
 
-Happy coding!
+### Schedule
+
+The schedule appears when a user a user signs in with staff status. It displays a week. There are the days with dates in the first row, employees' name in the first column grouped by positions. And the shift in the table. What can be empty, sick, vacation or a shift time, maybe two if there is a split shift.
+
+![Schedule](documentation/README/schedule.png)
+
+#### Previous and Next
+
+Clicking these buttons other weeks are accessible.
+
+### Edit Schedule
+
+This section is only available for superusers. They can add or edit shift with the edit button. And delete with the delete button.
+
+![Edit Schedule](documentation/README/edit-schedule.png)
+
+#### Shift Types
+
+Clicking shit a shift input, sick or vacation sets back the other two types.
+
+#### Quick Fill
+
+If the superuser clicks a cell on the schedule, then the date and the employee’s name will be automatically copied from there to edit schedule.
+
+#### Check Shift Correctness
+
+The JavaScript checks if the shifts startings and endings in an appropriate order. If isn't, then still can be a shift what pass midnight. It checks if it is possible. If the shift still has no sense, then it drops an error message. Only by split shift.
+
+![Edit Error](documentation/README/edit-error.png)
+
+### Chat
+
+It appears for every user with staff status. It is possible only to read and write new messages. Every message is marked with a date and the sender.
+
+![Chat](documentation/README/chat.png)
+
+### Logged In User
+
+If the user is logged in, then the name of the user appears on the footer.
+
+![Logged In User](documentation/README/loged-in-user.png)
+
+### Future Implementations
+
+Depending the future feedbacks and development different implementations can be.
+
+* A setting page will be created, so that the superuser will be able to select from the features.
+* If the chat happened to be not useful then it will be optional or deleted.
+* The chat may get its own page, when the home page gets too crowded.
+* If the chat will be used by the companies, then editing and deleting functions will be added.
+* Template will be savable for employees, so that will be automatically or with a button loaded for the next week.
+* Other type of template will be accessible for the most used shift.
+* Shift correctness checking will be updated according the law and the company policy.
+* Schedule policy for the different positions will be possible to set in another page.
+
+## Technologies Used
+
+### Languages Used
+
+HTML, CSS, JavaScript, Python
+
+### Used Programs
+
+| Program | Purpose |
+| --- | --- |
+| Figma | To create wireframe. |
+| Github | To save project. |
+| Heroku | To deploy project. |
+| Sublime Text | To coding. |
+| Git | To manage versions. |
+| Paint | To edit readme images. |
+| tinypng.com | To tinify images. |
+| Firefox Developer Tools | To find CSS and JavaScript bugs and to check responsiveness. |
+| ChatGTP | To search coding keywords and solutions. |
+| Ms Office Word | To correct spelling. |
+
+## Deployment & Local Development
+
+### Deployment
+
+The site is deployed using GitHub Pages - [Work Schedule](https://zoltannyaradi.github.io/work-schedule/).
+
+To Deploy the site using GitHub Pages:
+
+1. Login (or signup) to Github.
+2. Go to the repository for this project, [ZoltanNyaradi/work-schedule](https://github.com/ZoltanNyaradi/work-schedule/deployments).
+3. Click the settings button.
+4. Select pages in the left hand navigation menu.
+5. From the source dropdown select main branch and press save.
+6. The site has now been deployed, please note that this process may take a few minutes before the site goes live.
+
+### Local Development
+
+#### How to Fork
+
+To fork the repository:
+
+1. Log in (or sign up) to Github.
+2. Go to the repository for this project, [ZoltanNyaradi/work-schedule](https://github.com/ZoltanNyaradi/work-schedule/deployments).
+3. Click the Fork button in the top right corner.
+
+#### How to Clone
+
+To clone the repository:
+
+1. Log in (or sign up) to GitHub.
+2. Go to the repository for this project, [ZoltanNyaradi/work-schedule](https://github.com/ZoltanNyaradi/work-schedule/deployments).
+3. Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
+4. Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
+5. Type 'git clone' into the terminal and then paste the link you copied in step 3. Press enter.
+
+## Testing
+
+### Detailed Testing
+
+Manual testing can be found in the [TESTING.md](TESTING.md) file.
+
+### Fixed Bugs
+
+| Bug | Cause | Solution |
+| --- | --- | --- |
+| WSGI didn't work | WSGI's name was misspelled | Change "-" to "_" |
+| Code failed to find out if a shift was already in the database | Code logic was bad | Use correct method to do |
+| Post request from scheduleForm and messageForm were the same | Couldn’t get form name  | Add a hidden element for scheduleForm |
+| Js error at checking shift times | Code iterated over an array | Fix the conditions of the loop |
+| H2 element had wrong text color | H20 was in the ccs | Delete the 0 |
+| Changing week buttons didn't work| Monday cell got a class | Cutting data from Monday cell's html was adjusted |
+| Rendering data didn't work | rendering schedule form caused a bug | Delete this line of code |
+| Form disappeared | Js delete the form | Add another form to delete that instead |
+
+### Test With Software
+
+#### HTML Validator
+
+[validator.w3.org](https://validator.w3.org/) was used to validate HTML code. After correcting a few error, it doesn't show more error.
+
+#### CSS Validator
+
+[Jigsaw](https://jigsaw.w3.org/css-validator/) found no error in the CSS file.
+
+#### JS Validator
+
+[JSHint](https://jshint.com/) found some missing semicolons and declarations. After these were corrected only 3 warnings remained.
+
+17	Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (klickToShift)
+
+134	Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (fillForm, datesOfTheWeek, j, employees, i)
+
+330	Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (employees, i, datesOfTheWeek, j, shiftExist, shift)
+
+But these don't cause any issue.
+
+#### PEP 8 Style Checker
+
+To check and upgrade code style [code:wof](https://www.codewof.co.nz/style/python3/) was used.
+
+#### Google Lighthouse 
+
+Google Lighthouse was used to check performance, accessibility, best practices and search engine optimization. All test passed.
+
+![Lighthouse](documentation/README/lighthouse.png)
+
+## Credits
+
+### Code Sources
+
+#### Convert Datetime
+
+It was necessary to convert datetime values to pass them for JS.
+
+![Convert Datetime](documentation/README/convert-datetime.png)
+
+#### Find Existing Record
+
+With this code I could find existing recods in the database, so the code can differentiate if it should edit or create this record.
+
+![Find Existing Record](documentation/README/find-existing-recod.png)
+
+#### Return JSON
+
+With this solution possible to send a list from the backend to the frontend.
+
+![Return JSON](documentation/README/render-json.png)
+
+### Acknowledgements
+
+I would like to thank for
+ - my mentor Jubril Akolade who helped me with his valuable views,
+ - my friends Puska Richard and Sisa Bence who tired the site and gave me usefull feedbacks.

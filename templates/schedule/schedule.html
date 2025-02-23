@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Loged in user -->
+{% if user.is_authenticated %}
+
+<!-- Authorised user -->    
+    {% if user.is_staff %}
+
+<!-- Schedule -->
+        <div id="schedule">
+            <div>
+                <div id="schedule-container" class="container">
+                </div>
+            </div>
+            <div id="schedule-buttons">
+                <button id="previous" class="btn">
+                    Previous
+                </button>
+                <button id="next" class=btn>
+                    Next
+                </button>
+            </div>
+        </div>
+
+<!-- Admin -->
+<!-- Edit Schedule -->
+        <div id="edit-schedule">{% if user.is_superuser %}
+            <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="scheduleForm">
+                {% csrf_token %}
+                <input type="hidden" name="form" value="edit-schedule-form">
+                <div id="schedule-form-div">
+                    <div>
+                        <label for="employee-name">Employee: </label>
+                         <select id="employee-name" name="user" class="long-input edit-schedul-input">
+                        </select>
+                    </div>
+                    <div>
+                        <label for="shift-date">Date: </label>
+                        <br>
+                        <input class="long-input edit-schedule-input" type="date" id="shift-date" name="date">
+                    </div>
+                    <div>
+                        <label for="shift-start">Shift: </label>
+                        <br>
+                        <div class="shift-div">
+                            <input class="shift edit-schedule-input" type="time" id="shift-start" name="begin_of_work_1">
+                            <label for="shift-end">-</label>
+                            <input class="shift edit-schedule-input" type="time" id="shift-end" name="end_of_work_1">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="shift-start-2">2nd Shift: </label>
+                        <br>
+                        <div class="shift-div">
+                            <input class="shift edit-schedule-input" type="time" id="shift-start-2" name="begin_of_work_2">
+                            <label for="shift-end-2">-</label>
+                            <input class="shift edit-schedule-input" type="time" id="shift-end-2" name="end_of_work_2">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <p id="shift-error">Something wrong with the order!</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="quick-options">
+                    <div>
+                        <input type="radio" id="vacation" name="vacation">
+                        <label for="vacation">Vacation: </label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sick" name="sick">
+                        <label for="sick">Sick: </label>
+                    </div>
+                </div>
+            
+                <div id="submit-schedule-div">
+                    <button name="edit-schedule-crud" id="edit-schedule-btn" class="btn" type="submit" value="edit">Edit</button>
+                    <button name="edit-schedule-crud" id="delete-schedule" class="btn" type="submit" value="delete">Delete</button>
+                </div>
+            </form>
+        {% endif %}</div>
+<!-- Chat -->
+        <div id="chat">
+            <div id="read-and-write">
+                <div id="read">
+                </div>
+                <div id="write-message-div">
+                    <form id="messageForm" method="post" action="{% url 'schedule'%}" name="form">
+                        {% csrf_token %}
+                        <textarea id="message" name="body" placeholder="..." rows="3"></textarea>
+                        <button type="submit" id="send-message" class="btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<!-- Json -->  
+        <script id="users-data" type="application/json">
+            {{users|safe}}
+        </script> 
+        <script id="schedule-data" type="application/json">
+            {{ schedules|safe }}
+        </script>
+        <script id="messages-data" type="application/json">
+            {{ messages|safe }}
+        </script>
+
+<!-- Js -->
+        <script src="{% static 'js/script.js' %}"></script>
+    {% else %}
+
+<!-- Unauthorised user -->
+    <div class="account-container">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
+                        <p>Your account haven't been confirmed yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Loged out user -->
+{% else %}
+    <div class="account-container">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
+                        <h2>Welcome!</h2>
+                        <p>Work Schedule the best way to write and read the schedule.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 mt-3 offset-md-2">
+
+                        <form method="post" action="{% url 'account_login' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                            {% endif %}
+                            <button class="btn btn-auth right" type="submit">Sign In</button>
+                        </form>
+                        <form method="post" action="{% url 'account_signup' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                            {% endif %}
+                            <button class="btn btn-auth right" type="submit">Sign Up</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

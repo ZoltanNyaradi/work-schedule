@@ -1,0 +1,36 @@
+"""Create classes for models."""
+
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Message(models.Model):
+    """Model for storing messages."""
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="message_writer")
+    created_on = models.DateTimeField(auto_now_add=True)
+    body = models.TextField()
+
+
+class Schedule(models.Model):
+    """
+    Model for storing schedules.
+
+    Stores the day the releted user,
+    and one or two starting and finishing time.
+    """
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="worker")
+    date = models.DateField()
+    begin_of_work_1 = models.TimeField(null=True, blank=True)
+    end_of_work_1 = models.TimeField(null=True, blank=True)
+    begin_of_work_2 = models.TimeField(null=True, blank=True)
+    end_of_work_2 = models.TimeField(null=True, blank=True)
+    sick = models.BooleanField(default=False)
+    vacation = models.BooleanField(default=False)
