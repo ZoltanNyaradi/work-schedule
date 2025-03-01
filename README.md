@@ -11,6 +11,7 @@ Do you write the schedule for your coworkers in a usual spreadsheet? Are you mis
   * [Typography](#typography)
   * [Favicon](#favicon)
   * [Wireframe](#wireframe)
+  * [ERD](#erd)
 * [Feathers](#feathers)
   * [Authentication Pages](#authentication-pages)
     * [Welcome](#welcome)
@@ -92,6 +93,10 @@ There are two kinds of pages on the site one is the authentication the other is 
 ![Schedule Mobile](documentation/README/schedule-mobile.png)
 ![Auth Screen](documentation/README/auth-screen.png)
 ![Schedule Screen](documentation/README/schedule-screen.png)
+
+### ERD
+
+![ERD](documentation/README/erd.png)
 
 ## Feathers
 
@@ -248,6 +253,7 @@ HTML, CSS, JavaScript, Python
 | Firefox Developer Tools | To find CSS and JavaScript bugs and to check responsiveness. |
 | ChatGTP | To search coding keywords and solutions. |
 | Ms Office Word | To correct spelling. |
+| draw.io | Draw ERD diagram. |
 
 ## Deployment & Local Development
 

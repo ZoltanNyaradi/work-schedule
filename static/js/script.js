@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded",function(){
-	
+	const now = new Date();
+	console.log(now);
+
 	loadSchedule(loadDatesOfTheWeek());
 	// Load the schedule on the screen
 
@@ -39,7 +41,7 @@ function loadSchedule(datesOfTheWeek){
 	// Declare an array for columns
 	let cell = [];
 	// Declare an array for cells
-	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thurstday","Friday","Saturday","Sunday"];
+	let daysOfTheWeek = ["","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
 	// Declare an array for days and fill it up
 	// First column for the employees,
 	// so the first variable will be an empty string
@@ -495,7 +497,7 @@ function checkShifts(){
 			}
 			for (let earlier=0; earlier<3; earlier++){
 				for (let later=earlier+1; later<4; later++){
-					// Take every parring situation
+					// Take every pairing situation
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
 						if(timeInt[earlier]-1000 < timeInt[later]){

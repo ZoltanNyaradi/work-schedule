@@ -8,18 +8,25 @@ from .forms import ScheduleForm, MessageForm
 from .models import Schedule, Message
 
 
-def schedule(request):
-    """
-    Handle Post request.
+def message_list():
+    """Return the list of messages"""
 
-    Schedule editing and message sending.
-    Render schedule, messages.
-    """
-    # Get users
-    users = list(User.objects.values('id', 'username', 'groups', 'is_staff'))
     # Get messages
     messages = list(Message.objects.values("user", "created_on", "body"))
-    # Get schedules
+
+    # Change created_on's format suitable for Json
+    for message in messages:
+        # Convert date to string
+        if isinstance(message["created_on"], datetime):
+            message["created_on"] = message["created_on"].strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+    # Return messages
+    return messages
+
+
+def schedule_list():
+    """Return the list of schedule"""
     schedules = list(Schedule.objects.values(
         "user",
         "date",
@@ -29,14 +36,6 @@ def schedule(request):
         "end_of_work_2",
         "sick",
         "vacation"))
-
-    # Change created_on's format suitable for Json
-    for message in messages:
-        # Convert date to string
-        if isinstance(message["created_on"], datetime):
-            message["created_on"] = message["created_on"].strftime(
-                "%Y-%m-%d %H:%M:%S"
-            )
 
     # Change schedule's date and times' format suitable for Json
     for schedule in schedules:
@@ -65,6 +64,23 @@ def schedule(request):
             schedule["end_of_work_2"] = schedule["end_of_work_2"].strftime(
                 "%H:%M:%S"
                 )
+    # Return schedules
+    return schedules
+
+
+def schedule(request):
+    """
+    Handle Post request.
+
+    Schedule editing and message sending.
+    Render schedule, messages.
+    """
+    # Get users
+    users = list(User.objects.values('id', 'username', 'groups', 'is_staff'))
+    # Get messages
+    messages = message_list()
+    # Get schedules
+    schedules = schedule_list()
 
     # Handle post request
     if request.method == "POST":
@@ -114,11 +130,15 @@ def schedule(request):
                             existing_schedule.vacation = var
                             existing_schedule.save()
                             print("shift updated")
+                            # Refresh schedules
+                            schedules = schedule_list()
 
                         # If wasn't then create it
                         else:
                             s_form.save()
                             print("shift created")
+                            # Refresh schedules
+                            schedules = schedule_list()
 
                     # Shift is unfilled
                     else:
@@ -148,6 +168,7 @@ def schedule(request):
                 # Save message
                 message_form.instance.user = request.user
                 message_form.save()
+                messages = message_list()
 
             # The form isn't valid
             else:
