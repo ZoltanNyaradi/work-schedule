@@ -55,7 +55,6 @@ function loadSchedule(datesOfTheWeek){
 	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
 	// Declare a matrix for shifts
 
-	
 
 	for(let i = 0; i < numberOfEmployees; i++){
 		row.push(document.createElement("div"));
