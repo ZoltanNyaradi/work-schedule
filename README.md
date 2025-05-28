@@ -6,6 +6,13 @@ Do you write the schedule for your coworkers in a usual spreadsheet? Are you mis
 
 ## Contents
 
+* [User Stories](#user-stories)
+  * [Welcome Page](#welcome-page)
+  * [Authentication](#authentication)
+  * [General](#general)
+  * [Staff](#staff)
+  * [Admin](#admin)
+  * [Admin Page](#admin-page) 
 * [Design](#design)
   * [Color Scheme](#color-scheme)
   * [Typography](#typography)
@@ -58,6 +65,54 @@ Do you write the schedule for your coworkers in a usual spreadsheet? Are you mis
     * [Find Existing Record](#find-existing-record)
     * [Return JSON](#return-json)
   * [Acknowledgements](#acknowledgements)
+
+## User Stories
+
+Githubs projects and issues were used for agil programing. 29 user stories were created for this project. 
+
+### Welcome Page
+
+- User Story - As a not logged in user I can open the website so that I see the welcome page
+- User Story - As a user I can click the sign in button on welcome page so that I can navigate to sign in page
+- User Story - As a user I can click on the sign up button so that I can navigate to the sign up page
+
+### Authentication
+
+- User Story - As a user I can click a hypertext on sign up page so that I can navigate to sign in page
+- User Story - As a user I can sign up so that I enter the app
+- User Story - As a logged in user I can sign out so that I exit the app
+- User Story - As a user I can click on go back button on sign out page so that I go back to the content
+
+### General
+
+- User Story - As a logged in user I can click on the sign out button so that I can navigate to sign out page
+- User Story - As a logged in user I can see the text "You are logged in as ..." with the user's username
+
+### Staff
+
+- User Story - As a staff I can see the schedule so that I see my shifts
+- User Story - As a staff I can push the next button so that I can see the next week's shifts
+- User Story - As a staff I can see the chat so that I can read the messages
+- User Story - As a staff I can write a new message so that my message appears on the chat-board
+
+### Admin
+
+- User Story - As a Superuser I can click on a shift on the schedule table so that the date and the employee regarding of the cell loads on the edit section
+- User Story - As a superuser I can select employee on the edit-board so that I can change that employee's shift
+- User Story - As a superuser I can select a date on schedule editing so that I can modify a shift in that day
+- User Story - As a superuser I can enter times for the shift so that I can set starting and ending for shifts
+- User Story - As a superuser I can click on vacation radio button so that I can set a vacation
+- User Story - As a Superuser I can select the sick radio button so that I can set a shift too sick leave
+- User Story - As a superuser I can click on the edit so that I can modify the schedule
+- User Story - As a superuser I can push the delete button so that the chosen shift will be deleted
+- User Story - As a superuser I can get a feedback if I incorrectly filled the form so that I can correct myself
+
+### Admin Page
+
+- User Story - As a superuser I can enter the django admin page so that I can reach more admin options
+- User Story - As a superuser I can create groups so that employees can be assign to groups
+- User Story - As a superuser I can modify user properties so that I can give privileges, change password, add groups, delete users
+- User Story - As a superuser I can delete messages
 
 ## Design
 
