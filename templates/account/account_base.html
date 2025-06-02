@@ -7,4 +7,17 @@
 	    {% endblock account_content %}
 	</div>
 </div>
+
+
+{% if form.errors %}
+  <script>
+    const formErrors = {
+      {% for field, errors in form.errors.items %}
+        "{{ field }}": "{{ errors.as_text|escapejs }}",
+      {% endfor %}
+    };
+    handleFormError(formErrors);
+  </script>
+{% endif %}
+
 {% endblock %}

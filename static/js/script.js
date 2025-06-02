@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded",function(){
-	const now = new Date();
-	console.log(now);
 
 	loadSchedule(loadDatesOfTheWeek());
 	// Load the schedule on the screen
@@ -25,6 +23,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	}
 
 	loadMessages();
+
 
 });
 
@@ -420,6 +419,8 @@ function changeWeek(change){
 
 	loadSchedule(datesOfTheWeek);
 	// Create the new schedule
+
+
 }
 
 function loadMessages(){
