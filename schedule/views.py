@@ -179,6 +179,8 @@ def schedule(request):
         s_form = ScheduleForm()
         print("it's not a post")
 
+    schedules = schedule_list()
+
     # Render schedule and messages
     return render(
         request,

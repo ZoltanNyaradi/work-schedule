@@ -30,9 +30,6 @@ p, h1, h2, #log-out, .account-container a, .btn, .text-bubble{
 	color: #000000;	/* Black */
 }
 
-#shift-error{
-	color: red;
-}
 /* Fonts */
 
 h1, p, button, label, input, select{
@@ -175,10 +172,6 @@ footer{
 
   display: flex;
   justify-content: space-between;
-}
-
-#shift-error{
-	visibility: hidden;
 }
 
 #submit-schedule-div{
@@ -363,10 +356,6 @@ footer{
   }
 }
 
-#shift-error{
-		font-size: .6rem;
-}
-
 /* Media query for pcs and bigger______________________________________________ */
 @media screen and (min-width: 1024px){
 	/* Background-Colors*/
@@ -430,16 +419,6 @@ footer{
 
 		display: flex;
 		flex-direction: column;
-	}
-
-	#shift-error{
-		font-size: .8rem;
-		margin-bottom: 1rem;
-	}
-
-	#name-error{
-		font-size: 12px;
-		color: red;
 	}
 
 	#quick-options{

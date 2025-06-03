@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded",function(){
-	const now = new Date();
-	console.log(now);
 
 	loadSchedule(loadDatesOfTheWeek());
 	// Load the schedule on the screen
@@ -21,10 +19,13 @@ document.addEventListener("DOMContentLoaded",function(){
 
 		loadEmployeesToEditSchedule();
 
-		document.getElementById("scheduleForm").addEventListener("submit",(event)=>{checkShifts();});
+		document.getElementById("edit-schedule-btn").addEventListener("click",(event)=>{checkShifts();});
+	
+		document.getElementById("delete-schedule").addEventListener("click",(event)=>{deleteShift();});
 	}
 
 	loadMessages();
+
 
 });
 
@@ -55,6 +56,7 @@ function loadSchedule(datesOfTheWeek){
 	let shiftsOfTheWeek = loadSchiftOfTheWeek(datesOfTheWeek[0], numberOfEmployees, employees, datesOfTheWeek);
 	// Declare a matrix for shifts
 
+	
 
 	for(let i = 0; i < numberOfEmployees; i++){
 		row.push(document.createElement("div"));
@@ -419,6 +421,8 @@ function changeWeek(change){
 
 	loadSchedule(datesOfTheWeek);
 	// Create the new schedule
+
+
 }
 
 function loadMessages(){
@@ -471,59 +475,157 @@ function checkShifts(){
 	 * If not send an error message
 	 * If yes send the form
 	 */
+	const scheduleForm = document.getElementById("scheduleForm");
+	const vacation = document.getElementById("vacation");
+	const sick = document.getElementById("sick");
+
+	event.preventDefault();
 
 	let time = [];
 	// Declare an array for the times
-	time.push(document.getElementById("shift-start"));
+	time.push(document.getElementById("shift-start").value);
 	// Write the first start in the array
-	time.push(document.getElementById("shift-end"));
+	time.push(document.getElementById("shift-end").value);
 	// Write the first end in the array
-	time.push(document.getElementById("shift-start-2"));
+	time.push(document.getElementById("shift-start-2").value);
 	// Write the second start in the array
-	time.push(document.getElementById("shift-end-2"));
+	time.push(document.getElementById("shift-end-2").value);
 	// Write the second end in the array
 
 	if(time[0]=="" || time[1]==""){
-		event.preventDefault();
-			// Stop the form to submit
+// Vacation or Sick leave
+		if (vacation.checked || sick.checked){
+			Swal.fire({
+				title: 'Success!',
+				text: 'The shift has been changed successfully.',
+				icon: 'success',
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	submitForm("edit");
+			    }
+			});
+// No input
+		} else if(time[0]=="" && time[1]=="") {
+			Swal.fire({
+				title: 'Error!',
+				text: "No shift was entered. You can't have second shift without first shift.",
+				icon: 'error',
+				confirmButtonText: "OK",
+			});
+// Shift start or end missing
+		} else {
+
+			Swal.fire({
+				title: 'Error!',
+				text: 'The start or end of the shift is missing.',
+				icon: 'error',
+				confirmButtonText: "OK",
+			});
+
+		}
 	} else {
-		if(time[2].value!="" && time[3]!=""){
+		if(time[2]!="" && time[3]!=""){
 			let timeInt = [];
 			// Declare an array to convert the times into int
 			for (let i=0; i<4; i++){
 				// Slice the number part and convert them to int
-				timeInt.push(parseInt(time[i].value.slice(0,2)+time[i].value.slice(3,5)));
+				timeInt.push(parseInt(time[i].slice(0,2)+time[i].slice(3,5)));
 			}
 			for (let earlier=0; earlier<3; earlier++){
 				for (let later=earlier+1; later<4; later++){
 					// Take every pairing situation
+// Time order is ambiguous
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
-						if(timeInt[earlier]-1000 < timeInt[later]){
-							// Check if the earlier time is not much bigger
-							// It is possible that, that is a night shift
-							event.preventDefault();
-							// Stop the form to submit
-							document.getElementById("shift-error").style.visibility = "visible";
-							// Show the error message
-						}else{
-							document.getElementById("shift-error").style.visibility = "hidden";
-							// Hide the error message
-						}
-					}else{
-						document.getElementById("shift-error").style.visibility = "hidden";
-						// Hide the error message
+						Swal.fire({
+							title: 'Error!',
+							text: 'The shift has to start before the end. The first shift has to finish before the second one can start.',
+							icon: 'error',
+							confirmButtonText: "OK",
+						});
 					}
 				}
 			}
+// Split shift correct fill
+			Swal.fire({
+				title: 'Success!',
+				text: 'The shift has been changed successfully.',
+				icon: 'success',
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	submitForm("edit");
+			    }
+			});;
 		} else {
-			if(time[2]=="" || time[3]==""){
-				event.preventDefault();
-				// Stop the form to submit
-			} else {
-				// Only one shift
+// Missing start or end from the second shift
+			if(time[2]=="" && time[3]==""){
+
+				Swal.fire({
+					title: 'Success!',
+					text: 'The shift has been changed successfully.',
+					icon: 'success',
+				}).then((result) => {
+				    if (result.isConfirmed) {
+				    	submitForm("edit");
+				    }
+				});
+
+// One shift correct fill
+			} else if(time[2]=="" || time[3]==""){
+				
+			Swal.fire({
+				title: 'Error!',
+				text: 'The start or end of the shift is missing.',
+				icon: 'error',
+				confirmButtonText: "OK",
+			});
 			}
-			
 		}
 	}
+}
+
+function deleteShift(){
+
+	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
+	const employee = document.getElementById("employee-name");
+	const date = document.getElementById("shift-date");
+	const scheduleForm = document.getElementById("scheduleForm");
+
+	let success = false;
+
+	event.preventDefault();
+	
+	schedules.forEach(schedule=>{
+		if(schedule.date==date.value && schedule.user==employee.value){
+
+			Swal.fire({
+			title: 'Success!',
+			text: 'Shift is deleted successfully.',
+			icon: 'success',
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	scheduleForm.submit();
+			    }
+			});;
+
+			success = true;
+			
+		}
+	})
+
+	if(success==false){
+
+		Swal.fire({
+			title: 'Error!',
+			text: 'No shift found.',
+			icon: 'error',
+		});
+
+	}	
+}
+
+function submitForm(button){
+
+    document.getElementById("crud-action").value = button;
+    document.getElementById("scheduleForm").submit();
 }

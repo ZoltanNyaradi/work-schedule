@@ -7,7 +7,6 @@ from allauth.account.models import EmailAddress
 from .models import Schedule, Message
 
 # Register models
-admin.site.register(Schedule)
 admin.site.register(Message)
 
 # Unregister models

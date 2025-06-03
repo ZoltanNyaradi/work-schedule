@@ -31,6 +31,7 @@
             <form id="scheduleForm" method="post" action="{% url 'schedule'%}" name="scheduleForm">
                 {% csrf_token %}
                 <input type="hidden" name="form" value="edit-schedule-form">
+                <input type="hidden" name="edit-schedule-crud" id="crud-action">
                 <div id="schedule-form-div">
                     <div>
                         <label for="employee-name">Employee: </label>
@@ -58,11 +59,6 @@
                             <input class="shift edit-schedule-input" type="time" id="shift-start-2" name="begin_of_work_2">
                             <label for="shift-end-2">-</label>
                             <input class="shift edit-schedule-input" type="time" id="shift-end-2" name="end_of_work_2">
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <p id="shift-error">Something wrong with the order!</p>
                         </div>
                     </div>
                 </div>
@@ -119,7 +115,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 mt-3 offset-md-2">
-                        <p>Your account haven't been confirmed yet.</p>
+                        <h2>You Signed Up Successfully!</h2>
+                        <p>Wait until your account has been confirmed.</p>
                     </div>
                 </div>
             </div>
