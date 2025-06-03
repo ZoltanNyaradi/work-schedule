@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 		loadEmployeesToEditSchedule();
 
-		document.getElementById("edit-schedule-btn").addEventListener("submit",(event)=>{checkShifts();});
+		document.getElementById("edit-schedule-btn").addEventListener("click",(event)=>{checkShifts();});
 	
 		document.getElementById("delete-schedule").addEventListener("click",(event)=>{deleteShift();});
 	}
@@ -479,6 +479,8 @@ function checkShifts(){
 	const vacation = document.getElementById("vacation");
 	const sick = document.getElementById("sick");
 
+	event.preventDefault();
+
 	let time = [];
 	// Declare an array for the times
 	time.push(document.getElementById("shift-start").value);
@@ -495,27 +497,31 @@ function checkShifts(){
 		if (vacation.checked || sick.checked){
 			Swal.fire({
 				title: 'Success!',
-				text: 'Shift is changed successfully.',
+				text: 'The shift has been changed successfully.',
 				icon: 'success',
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	submitForm("edit");
+			    }
 			});
 // No input
 		} else if(time[0]=="" && time[1]=="") {
-			event.preventDefault();
 			Swal.fire({
 				title: 'Error!',
-				text: 'No shift was entered.',
+				text: "No shift was entered. You can't have second shift without first shift.",
 				icon: 'error',
 				confirmButtonText: "OK",
 			});
 // Shift start or end missing
 		} else {
-			event.preventDefault();
+
 			Swal.fire({
 				title: 'Error!',
-				text: 'Missing start or end.',
+				text: 'The start or end of the shift is missing.',
 				icon: 'error',
 				confirmButtonText: "OK",
 			});
+
 		}
 	} else {
 		if(time[2]!="" && time[3]!=""){
@@ -531,11 +537,9 @@ function checkShifts(){
 // Time order is ambiguous
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
-						event.preventDefault();
-						// Stop the form to submit
 						Swal.fire({
 							title: 'Error!',
-							text: 'Shift has to start befor ends. First shift has to end befor second shift.',
+							text: 'The shift has to start before the end. The first shift has to finish before the second one can start.',
 							icon: 'error',
 							confirmButtonText: "OK",
 						});
@@ -544,63 +548,84 @@ function checkShifts(){
 			}
 // Split shift correct fill
 			Swal.fire({
-					title: 'Success!',
-					text: 'Shift is changed successfully.',
-					icon: 'success',
-			});
+				title: 'Success!',
+				text: 'The shift has been changed successfully.',
+				icon: 'success',
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	submitForm("edit");
+			    }
+			});;
 		} else {
 // Missing start or end from the second shift
-			if(time[2]=="" || time[3]==""){
-				
-				event.preventDefault();
-			Swal.fire({
-				title: 'Error!',
-				text: 'Missing start or end.',
-				icon: 'error',
-				confirmButtonText: "OK",
-			});
-// One shift correct fill
-			} else if(time[2]=="" && time[3]==""){
+			if(time[2]=="" && time[3]==""){
 
 				Swal.fire({
 					title: 'Success!',
-					text: 'Shift is changed successfully.',
+					text: 'The shift has been changed successfully.',
 					icon: 'success',
+				}).then((result) => {
+				    if (result.isConfirmed) {
+				    	submitForm("edit");
+				    }
 				});
+
+// One shift correct fill
+			} else if(time[2]=="" || time[3]==""){
+				
+			Swal.fire({
+				title: 'Error!',
+				text: 'The start or end of the shift is missing.',
+				icon: 'error',
+				confirmButtonText: "OK",
+			});
 			}
-			
 		}
 	}
 }
 
 function deleteShift(){
+
 	const schedules = JSON.parse(document.getElementById("schedule-data").textContent);
 	const employee = document.getElementById("employee-name");
 	const date = document.getElementById("shift-date");
+	const scheduleForm = document.getElementById("scheduleForm");
 
 	let success = false;
+
+	event.preventDefault();
 	
 	schedules.forEach(schedule=>{
 		if(schedule.date==date.value && schedule.user==employee.value){
+
 			Swal.fire({
 			title: 'Success!',
 			text: 'Shift is deleted successfully.',
 			icon: 'success',
-			});
+			}).then((result) => {
+			    if (result.isConfirmed) {
+			    	scheduleForm.submit();
+			    }
+			});;
 
 			success = true;
-
-			form.submit();
+			
 		}
 	})
 
 	if(success==false){
-		event.preventDefault();
 
 		Swal.fire({
 			title: 'Error!',
 			text: 'No shift found.',
 			icon: 'error',
 		});
+
 	}	
+}
+
+function submitForm(button){
+
+    document.getElementById("crud-action").value = button;
+    document.getElementById("scheduleForm").submit();
 }
