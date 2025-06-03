@@ -2,7 +2,7 @@
 
 ![Work Schedule](documentation/README/work-schedule.png)
 
-Do you write the schedule for your coworkers in a usual spreadsheet? Are you missing specified features fir schedule writing and the existing features are just too time consuming to implement them. Here is the solution to your problem. Work Schedule gives you a clean site with build in feathers, what makes scheduling easier and faster. Implement in your company as well.
+Do you write the schedule for your coworkers in a usual spreadsheet? Are you missing specified features fir schedule writing and the existing features are just too time consuming to implement them. Here is the solution to your problem. Work Schedule gives you a clean site with build in feathers, what makes scheduling easier and faster. Implement in your company as well. Check the live app [here](https://work-schedule-fb81687f20a4.herokuapp.com/)!
 
 ## Contents
 
