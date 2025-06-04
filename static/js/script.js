@@ -531,31 +531,39 @@ function checkShifts(){
 				// Slice the number part and convert them to int
 				timeInt.push(parseInt(time[i].slice(0,2)+time[i].slice(3,5)));
 			}
+			let ambiguous = false;
 			for (let earlier=0; earlier<3; earlier++){
 				for (let later=earlier+1; later<4; later++){
 					// Take every pairing situation
-// Time order is ambiguous
 					if(timeInt[earlier] >= timeInt[later]){
 						// Check if the earlier time start later
-						Swal.fire({
-							title: 'Error!',
-							text: 'The shift has to start before the end. The first shift has to finish before the second one can start.',
-							icon: 'error',
-							confirmButtonText: "OK",
-						});
+						
+						ambiguous = true;
+						
 					}
 				}
 			}
+// Time order is ambiguous
+			if (ambiguous){
+				Swal.fire({
+						title: 'Error!',
+						text: 'The shift has to start before the end. The first shift has to finish before the second one can start.',
+						icon: 'error',
+						confirmButtonText: "OK",
+					});
 // Split shift correct fill
-			Swal.fire({
-				title: 'Success!',
-				text: 'The shift has been changed successfully.',
-				icon: 'success',
-			}).then((result) => {
-			    if (result.isConfirmed) {
-			    	submitForm("edit");
-			    }
-			});;
+			} else {
+				Swal.fire({
+					title: 'Success!',
+					text: 'The shift has been changed successfully.',
+					icon: 'success',
+				}).then((result) => {
+				    if (result.isConfirmed) {
+				    	submitForm("edit");
+				    }
+				});
+			}
+			
 		} else {
 // Missing start or end from the second shift
 			if(time[2]=="" && time[3]==""){
@@ -600,7 +608,7 @@ function deleteShift(){
 
 			Swal.fire({
 			title: 'Success!',
-			text: 'Shift is deleted successfully.',
+			text: 'Shift has been deleted.',
 			icon: 'success',
 			}).then((result) => {
 			    if (result.isConfirmed) {
