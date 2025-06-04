@@ -11,7 +11,7 @@
 
 | Feature | Action | Expected Result | Result |
 |---|---|---|---|
-| Sign in with missing or wrong data | Click to sign in | Stay in sign in page | Pass |
+| Sign in with missing or wrong data | Click to sign in | Alert arise | Pass |
 | Superuser signs in | Fill the form with superuser's data and click to sign in | Schedule opens with edit-schedule | Pass |
 | Staff signs in | Fill the form with staff's data and click to sign in | Schedule opens without edit-schedule | Pass |
 | Unauthorised user signs in | Fill the form with unauthorised user's data and click to sign in | Waiting for authorised message opens | Pass |
@@ -24,7 +24,9 @@
 
 | Feature | Action | Expected Result | Result |
 |---|---|---|---|
-| Sign up with missing data | Click to sign up with missing data | Signing up fails | Pass |
+| Sign up with missing data | Click to sign up with missing data | Error arise | Pass |
+| Incorrect pass | Click to sign up with week password | Error arise | Pass |
+| 2 pass doesn't match | Click to sign up with different passwords| Error arise | Pass |
 | Sign up | Fill the form and click to sign up | Unauthorised message opens | Pass |
 | Sign in link | Click to the link | Sign in page opens | Pass |
 
@@ -71,12 +73,13 @@
 | Shift | Click on shift | Vacation or shift will be checked out, in case shifts got a lighter background again | Pass |
 | Vacation | Click on vacation | Sick checks off, Shifts become empty and get a darker background | Pass |
 | Sick | Click on sick | Vacation checks off, Shifts become empty and get a darker background | Pass |
-| Missing shift | Click on edit with a missing shift start or begin | Shift doesn't save | Pass |
+| Missing shift | Click on edit with a missing shift start or begin | Alert arise | Pass |
+| No input | Click on edit without input | Alert arise | Pass |
 | Shifts aren't in order | Click on edit with ambigous shifts | Error message appears | Pass |
-| Shifts in order again | Click on edit with correct shifts, when error message is there | Error message disappears | Pass |
 | Auto fill | Click on schedule | The relevant employee and date load into edit schedule | Pass |
-| Edit | Click on edit with a correctly filled form | Create or edit a record in the database | Pass |
-| Delete | Click on delete | Delete the relevant shift | Pass |
+| Edit | Click on edit with a correctly filled form | Create or edit a record in the database, alert arise | Pass |
+| Delete | Click on delete | Delete the relevant shift, alert arise | Pass |
+| Delete nothing | Try to delete a no existing shift | Alert arise | Pass |
 
 ## Admin page
 
