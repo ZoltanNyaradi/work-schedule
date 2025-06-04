@@ -171,6 +171,10 @@ Here the user has the possibility to Sign Up with name, password and email optio
 
 ![Sign Up](documentation/README/sign-up.png)
 
+An error message pop up if the user incorrectly filled the form.
+
+![Sign Up Alerts](documentation/README/sign-up-alerts.png)
+
 #### User is not Authenticated
 
 When the user signs up, or sign in but isn't approved yet, then a message appear that the user isn't approved yet. 
@@ -180,6 +184,10 @@ When the user signs up, or sign in but isn't approved yet, then a message appear
 The user can enter on the sign in page with a username and a password. 
 
 ![Sign In](documentation/README/sign-in.png)
+
+And here is the possible error messages.
+
+![Sign In Alerts](documentation/README/sign-in-alerts.png)
 
 #### Sign Out
 
@@ -245,7 +253,7 @@ Clicking these buttons other weeks are accessible.
 
 ### Edit Schedule
 
-This section is only available for superusers. They can add or edit shift with the edit button. And delete with the delete button.
+This section is only available for superusers. They can add or edit shift with the edit button and delete with the delete button.
 
 ![Edit Schedule](documentation/README/edit-schedule.png)
 
@@ -259,9 +267,15 @@ If the superuser clicks a cell on the schedule, then the date and the employeeâ€
 
 #### Check Shift Correctness
 
-The JavaScript checks if the shifts startings and endings in an appropriate order. If isn't, then still can be a shift what pass midnight. It checks if it is possible. If the shift still has no sense, then it drops an error message. Only by split shift.
+The JavaScript checks if the shifts startings and endings in an appropriate order. If the shift still has no sense, then it drops an error message. Only by split shift.
 
-![Edit Error](documentation/README/edit-error.png)
+![Edit Alerts](documentation/README/edit-alerts.png)
+
+#### Delete Check
+
+The app checks if the shift is exist.
+
+![Delete Alerts](documentation/README/delete-alerts.png)
 
 ### Chat
 
